@@ -1,4 +1,4 @@
-package nhom12.oop14.quanlylaodong;
+package nhom12.oop14.entity;
 
 import java.io.Serializable;
 import java.util.Date;
