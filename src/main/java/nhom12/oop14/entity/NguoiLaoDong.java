@@ -13,11 +13,12 @@ public class NguoiLaoDong {
     private String tinhTrangHonNhan;
     private double thuNhap;
     private String hinhAnh;
+    private int Id;
 
     public NguoiLaoDong() {
     }
 
-    public NguoiLaoDong(String hoTen, String gioiTinh, Date ngaySinh, String noiO, String hoKhau, String ngheNghiep, String tinhTrangHonNhan, double thuNhap, String hinhAnh) {
+    public NguoiLaoDong(String hoTen, String gioiTinh, Date ngaySinh, String noiO, String hoKhau, String ngheNghiep, String tinhTrangHonNhan, double thuNhap, String hinhAnh, int Id) {
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;
@@ -27,6 +28,7 @@ public class NguoiLaoDong {
         this.tinhTrangHonNhan = tinhTrangHonNhan;
         this.thuNhap = thuNhap;
         this.hinhAnh = hinhAnh;
+        this.Id = Id;
     }
 
     public String getHoTen() {
@@ -100,4 +102,13 @@ public class NguoiLaoDong {
     public void setHinhAnh(String hinhAnh) {
         this.hinhAnh = hinhAnh;
     }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+    
 }
