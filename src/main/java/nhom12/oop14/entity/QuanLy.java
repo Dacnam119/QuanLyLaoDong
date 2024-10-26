@@ -1,8 +1,6 @@
 package nhom12.oop14.entity;
 
-import java.io.Serializable;
-
-public class QuanLy implements Serializable {
+public class QuanLy {
     private String taiKhoan;
     private String matKhau;
 
