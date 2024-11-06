@@ -75,6 +75,12 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         editNguoiLaoDongBtn = new javax.swing.JButton();
         deleteNguoiLaoDongBtn = new javax.swing.JButton();
         clearBtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        label1 = new java.awt.Label();
+        timKiemTenField = new javax.swing.JTextField();
+        searchBtn = new javax.swing.JButton();
+        sortNguoiLaoDongTenBtn = new javax.swing.JButton();
+        sortNguoiLaoDongThuNhapBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -271,6 +277,58 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        label1.setText("Tìm kiếm theo tên");
+
+        timKiemTenField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timKiemTenFieldActionPerformed(evt);
+            }
+        });
+
+        searchBtn.setText("Tìm kiếm");
+
+        sortNguoiLaoDongTenBtn.setText("Sắp xếp theo tên");
+
+        sortNguoiLaoDongThuNhapBtn.setText("Sắp xếp theo thu nhập");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(timKiemTenField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(sortNguoiLaoDongTenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(sortNguoiLaoDongThuNhapBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(timKiemTenField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchBtn))
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sortNguoiLaoDongTenBtn)
+                    .addComponent(sortNguoiLaoDongThuNhapBtn))
+                .addGap(29, 29, 29))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -280,6 +338,8 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 992, Short.MAX_VALUE))
                 .addContainerGap())
@@ -290,7 +350,9 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(372, Short.MAX_VALUE))
         );
 
@@ -304,6 +366,10 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
     private void gioiTinhBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gioiTinhBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_gioiTinhBoxActionPerformed
+
+    private void timKiemTenFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timKiemTenFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_timKiemTenFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,12 +427,18 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private java.awt.Label label1;
     private javax.swing.JTextField ngaySinhField;
     private javax.swing.JTextField ngheNghiepField;
     private javax.swing.JTable nguoiLaoDongTable;
     private javax.swing.JTextField noiOField;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JButton sortNguoiLaoDongTenBtn;
+    private javax.swing.JButton sortNguoiLaoDongThuNhapBtn;
     private javax.swing.JTextField thuNhapField;
+    private javax.swing.JTextField timKiemTenField;
     private javax.swing.JComboBox<String> tinhTrangHonNhanBox;
     // End of variables declaration//GEN-END:variables
 
@@ -546,15 +618,15 @@ private Double parseDouble(String text, String fieldName) {
     public void valueChanged(ListSelectionEvent e) {
     }
     
-    public void addAddStudentListener(ActionListener listener) {
+    public void addAddNguoiLaoDongListener(ActionListener listener) {
         addNguoiLaoDongBtn.addActionListener(listener);
     }
     
-    public void addEdiStudentListener(ActionListener listener) {
+    public void addEditNguoiLaoDongListener(ActionListener listener) {
         editNguoiLaoDongBtn.addActionListener(listener);
     }
     
-    public void addDeleteStudentListener(ActionListener listener) {
+    public void addDeleteNguoiLaoDongListener(ActionListener listener) {
         deleteNguoiLaoDongBtn.addActionListener(listener);
     }
     
@@ -562,18 +634,19 @@ private Double parseDouble(String text, String fieldName) {
         clearBtn.addActionListener(listener);
     }
     
-//    public void addSortStudentGPAListener(ActionListener listener) {
-//        sortStudentGPABtn.addActionListener(listener);
-//    }
-//    
-//    public void addSortStudentNameListener(ActionListener listener) {
-//        sortStudentNameBtn.addActionListener(listener);
-//    }
+    public void addSortNguoiLaoDongThuNhapListener(ActionListener listener) {
+        sortNguoiLaoDongThuNhapBtn.addActionListener(listener);
+    }
     
-    public void addListStudentSelectionListener(ListSelectionListener listener) {
+    public void addSortNguoiLaoDongTenListener(ActionListener listener) {
+        sortNguoiLaoDongTenBtn.addActionListener(listener);
+    }
+    
+    public void addListNguoiLaoDongSelectionListener(ListSelectionListener listener) {
         nguoiLaoDongTable.getSelectionModel().addListSelectionListener(listener);
     }
-
+    
+    
     private boolean validateNotEmpty(JTextField hoTenField, String tên) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
