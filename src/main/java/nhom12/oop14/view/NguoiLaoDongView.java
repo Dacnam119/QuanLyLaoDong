@@ -29,6 +29,8 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 
 import nhom12.oop14.entity.NguoiLaoDong;
+import nhom12.oop14.dao.NguoiLaoDongDAO;
+
 
 public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListener, ListSelectionListener {
 
@@ -285,6 +287,11 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         });
 
         searchBtn.setText("Tìm kiếm");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
 
         sortNguoiLaoDongTenBtn.setText("Sắp xếp theo tên");
 
@@ -368,40 +375,47 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         // TODO add your handling code here:
     }//GEN-LAST:event_timKiemTenFieldActionPerformed
 
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+
+
+
+    }//GEN-LAST:event_searchBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NguoiLaoDongView().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new NguoiLaoDongView().setVisible(true);
+
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNguoiLaoDongBtn;
@@ -439,6 +453,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
     private javax.swing.JComboBox<String> tinhTrangHonNhanBox;
     // End of variables declaration//GEN-END:variables
 
+    
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
@@ -532,113 +547,113 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         addNguoiLaoDongBtn.setEnabled(false);
     }
 
-   public NguoiLaoDong getNguoiLaoDongInfo() {
-    if (!validateFields()) {
+    public NguoiLaoDong getNguoiLaoDongInfo() {
+        if (!validateFields()) {
+            return null;
+        }
+
+        try {
+            NguoiLaoDong nguoilaodong = new NguoiLaoDong();
+
+            nguoilaodong.setId(Integer.parseInt(idField.getText().trim()));
+            nguoilaodong.setHoTen(hoTenField.getText().trim());
+            nguoilaodong.setGioiTinh(gioiTinhBox.getSelectedItem().toString());
+            nguoilaodong.setNgaySinh(parseDate(ngaySinhField.getText().trim()));
+            nguoilaodong.setNoiO(noiOField.getText().trim());
+            nguoilaodong.setHoKhau(hoKhauField.getText().trim());
+            nguoilaodong.setNgheNghiep(ngheNghiepField.getText().trim());
+            nguoilaodong.setTinhTrangHonNhan(tinhTrangHonNhanBox.getSelectedItem().toString());
+            nguoilaodong.setThuNhap(parseDouble(thuNhapField.getText().trim(), "Income"));
+
+            return nguoilaodong;
+        } catch (Exception e) {
+            showMessage(e.getMessage());
+        }
+
         return null;
     }
-    
-    try {
-        NguoiLaoDong nguoilaodong = new NguoiLaoDong();
-        
-        nguoilaodong.setId(Integer.parseInt(idField.getText().trim()));
-        nguoilaodong.setHoTen(hoTenField.getText().trim());
-        nguoilaodong.setGioiTinh(gioiTinhBox.getSelectedItem().toString());
-        nguoilaodong.setNgaySinh(parseDate(ngaySinhField.getText().trim()));
-        nguoilaodong.setNoiO(noiOField.getText().trim());
-        nguoilaodong.setHoKhau(hoKhauField.getText().trim());
-        nguoilaodong.setNgheNghiep(ngheNghiepField.getText().trim());
-        nguoilaodong.setTinhTrangHonNhan(tinhTrangHonNhanBox.getSelectedItem().toString());
-        nguoilaodong.setThuNhap(parseDouble(thuNhapField.getText().trim(), "Income"));
-        
-        return nguoilaodong;
-    } catch (Exception e) {
-        showMessage(e.getMessage());
-    }
-    
-    return null;
-}
 
-private boolean validateFields() {
-    return validateNotEmpty(hoTenField, "Tên") &&
-           validateNotEmpty(noiOField, "Nơi ở") &&
-           validateNotEmpty(hoKhauField, "Hộ khẩu") &&
-           validateNotEmpty(ngheNghiepField, "Nghề nghiệp") &&
-           validateIncome(thuNhapField) &&
-           validateDateOfBirth(ngaySinhField);
-}
+    private boolean validateFields() {
+        return validateNotEmpty(hoTenField, "Tên")
+                && validateNotEmpty(noiOField, "Nơi ở")
+                && validateNotEmpty(hoKhauField, "Hộ khẩu")
+                && validateNotEmpty(ngheNghiepField, "Nghề nghiệp")
+                && validateIncome(thuNhapField)
+                && validateDateOfBirth(ngaySinhField);
+    }
 
 // Kiểm tra ngày sinh hợp lệ
-private boolean validateDateOfBirth(JTextField dobField) {
-    try {
-        parseDate(dobField.getText().trim());
-        return true;
-    } catch (Exception e) {
-        dobField.requestFocus();
-        showMessage("Date of Birth không hợp lệ!");
-        return false;
+    private boolean validateDateOfBirth(JTextField dobField) {
+        try {
+            parseDate(dobField.getText().trim());
+            return true;
+        } catch (Exception e) {
+            dobField.requestFocus();
+            showMessage("Date of Birth không hợp lệ!");
+            return false;
+        }
     }
-}
 
 // Kiểm tra thu nhập hợp lệ
-private boolean validateIncome(JTextField incomeField) {
-    Double income = parseDouble(incomeField.getText().trim(), "Income");
-    if (income == null || income < 0) {
-        incomeField.requestFocus();
-        showMessage("Income không hợp lệ, phải là số dương.");
-        return false;
+    private boolean validateIncome(JTextField incomeField) {
+        Double income = parseDouble(incomeField.getText().trim(), "Income");
+        if (income == null || income < 0) {
+            incomeField.requestFocus();
+            showMessage("Income không hợp lệ, phải là số dương.");
+            return false;
+        }
+        return true;
     }
-    return true;
-}
 
-private Date parseDate(String text) {
-    try {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        return formatter.parse(text);
-    } catch (Exception e) {
-        throw new RuntimeException("Định dạng ngày không hợp lệ! Sử dụng định dạng dd/MM/yyyy.");
+    private Date parseDate(String text) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            return formatter.parse(text);
+        } catch (Exception e) {
+            throw new RuntimeException("Định dạng ngày không hợp lệ! Sử dụng định dạng dd/MM/yyyy.");
+        }
     }
-}
 
-private Double parseDouble(String text, String fieldName) {
-    try {
-        return (text != null && !text.isEmpty()) ? Double.parseDouble(text) : null;
-    } catch (NumberFormatException e) {
-        showMessage(fieldName + " không hợp lệ!");
-        return null;
+    private Double parseDouble(String text, String fieldName) {
+        try {
+            return (text != null && !text.isEmpty()) ? Double.parseDouble(text) : null;
+        } catch (NumberFormatException e) {
+            showMessage(fieldName + " không hợp lệ!");
+            return null;
+        }
     }
-}
 
-
+    @Override
     public void actionPerformed(ActionEvent e) {
     }
-    
+
     public void valueChanged(ListSelectionEvent e) {
     }
-    
+
     public void addAddNguoiLaoDongListener(ActionListener listener) {
         addNguoiLaoDongBtn.addActionListener(listener);
     }
-    
+
     public void addEditNguoiLaoDongListener(ActionListener listener) {
         editNguoiLaoDongBtn.addActionListener(listener);
     }
-    
+
     public void addDeleteNguoiLaoDongListener(ActionListener listener) {
         deleteNguoiLaoDongBtn.addActionListener(listener);
     }
-    
+
     public void addClearListener(ActionListener listener) {
         clearBtn.addActionListener(listener);
     }
-    
+
     public void addSortNguoiLaoDongThuNhapListener(ActionListener listener) {
         sortNguoiLaoDongThuNhapBtn.addActionListener(listener);
     }
-    
+
     public void addSortNguoiLaoDongTenListener(ActionListener listener) {
         sortNguoiLaoDongTenBtn.addActionListener(listener);
     }
-    
+
     public void addListNguoiLaoDongSelectionListener(ListSelectionListener listener) {
         nguoiLaoDongTable.getSelectionModel().addListSelectionListener(listener);
     }
@@ -646,8 +661,5 @@ private Double parseDouble(String text, String fieldName) {
     private boolean validateNotEmpty(JTextField hoTenField, String tên) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
-   
-}
 
+}

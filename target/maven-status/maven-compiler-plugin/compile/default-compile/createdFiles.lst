@@ -1,6 +1,7 @@
 nhom12\oop14\App$1.class
 nhom12\oop14\entity\NguoiLaoDong.class
 nhom12\oop14\view\LoginView.class
+nhom12\oop14\view\NguoiLaoDongView$6.class
 nhom12\oop14\dao\NguoiLaoDongDAO.class
 nhom12\oop14\view\LoginView$2.class
 nhom12\oop14\entity\NguoiLaoDongXML.class
