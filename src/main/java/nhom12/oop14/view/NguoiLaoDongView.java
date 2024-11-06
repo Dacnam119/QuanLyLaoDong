@@ -88,10 +88,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 
         nguoiLaoDongTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Họ tên", "Giới tính", "Ngày sinh", "Nơi ở", "Hộ khẩu", "Nghề nghiệp", "Tình trạng hôn nhân", "Thu nhập", "Hình ảnh"
@@ -645,10 +642,12 @@ private Double parseDouble(String text, String fieldName) {
     public void addListNguoiLaoDongSelectionListener(ListSelectionListener listener) {
         nguoiLaoDongTable.getSelectionModel().addListSelectionListener(listener);
     }
-    
-    
+
     private boolean validateNotEmpty(JTextField hoTenField, String tên) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    
+   
 }
 
