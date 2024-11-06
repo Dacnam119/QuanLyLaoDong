@@ -1,20 +1,16 @@
 
 package nhom12.oop14.view;
-
-
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import nhom12.oop14.entity.QuanLy;
+import nhom12.oop14.entity.User;
 
 public class LoginView extends javax.swing.JFrame {
-
     /**
      * Creates new form LoginView
      */
     public LoginView() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,7 +88,7 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_userNameFieldActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        
+
     }//GEN-LAST:event_loginBtnActionPerformed
 
     public void showMessage(String message) {
@@ -103,8 +99,8 @@ public class LoginView extends javax.swing.JFrame {
         loginBtn.addActionListener(listener);
     }
     
-    public QuanLy getQuanLy() {
-        return new QuanLy(userNameField.getText(), 
+    public User getQuanLy() {
+        return new User(userNameField.getText(), 
                 String.copyValueOf(passwordField.getPassword()));
     }
     /**
@@ -141,7 +137,6 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

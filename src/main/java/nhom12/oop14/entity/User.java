@@ -1,12 +1,13 @@
 package nhom12.oop14.entity;
 
-public class QuanLy {
+public class User {
     private String taiKhoan;
     private String matKhau;
 
-    public QuanLy() {
+    public User() {
     }
-    public QuanLy(String taiKhoan, String matKhau) {
+
+    public User(String taiKhoan, String matKhau) {
         this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
     }
@@ -26,6 +27,4 @@ public class QuanLy {
     public void setMatKhau(String matKhau) {
         this.matKhau = matKhau;
     }
-    
 }
-
