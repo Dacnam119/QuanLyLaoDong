@@ -659,4 +659,8 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
+    public String getSelectedNguoiLaoDongId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
