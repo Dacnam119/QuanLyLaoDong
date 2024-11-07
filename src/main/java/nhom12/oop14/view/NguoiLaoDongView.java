@@ -510,6 +510,14 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         }
     }
 
+    public String getSelectedNguoiLaoDongId() {
+    int selectedRow = nguoiLaoDongTable.getSelectedRow();
+    if (selectedRow >= 0) {
+        return nguoiLaoDongTable.getModel().getValueAt(selectedRow, 0).toString();
+    }
+    return null;
+}
+
     public void clearNguoiLaoDongInfo() {
         idField.setText("");
         hoTenField.setText("");
