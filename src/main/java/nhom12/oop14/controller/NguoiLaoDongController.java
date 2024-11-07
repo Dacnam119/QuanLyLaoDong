@@ -18,7 +18,7 @@ public class NguoiLaoDongController {
         this.dao = new NguoiLaoDongDAO();
         
         // Hiển thị danh sách người lao động
-        view.showListNguoiLaoDOng(dao.getDanhSach());
+        view.showListNguoiLaoDong(dao.getDanhSach());
 
         // Thêm các listener cho các nút
         view.addAddNguoiLaoDongListener(new AddNguoiLaoDongListener());
@@ -31,7 +31,9 @@ public class NguoiLaoDongController {
     }
 
     public void showNguoiLaoDongView() {
+        List<NguoiLaoDong> nguoiLaoDongList = dao.getDanhSach();
         view.setVisible(true);
+        view.showListNguoiLaoDong(nguoiLaoDongList);
     }
 
     class AddNguoiLaoDongListener implements ActionListener {
@@ -40,7 +42,7 @@ public class NguoiLaoDongController {
             NguoiLaoDong nld = view.getNguoiLaoDongInfo();
             if (nld != null) {
                 dao.themNguoiLaoDong(nld);
-                view.showListNguoiLaoDOng(dao.getDanhSach());
+                view.showListNguoiLaoDong(dao.getDanhSach());
                 view.clearNguoiLaoDongInfo();
                 view.showMessage("Thêm người lao động thành công");
             }
@@ -53,7 +55,7 @@ public class NguoiLaoDongController {
             NguoiLaoDong nld = view.getNguoiLaoDongInfo();
             if (nld != null) {
                 dao.capNhatNguoiLaoDong(nld);
-                view.showListNguoiLaoDOng(dao.getDanhSach());
+                view.showListNguoiLaoDong(dao.getDanhSach());
                 view.clearNguoiLaoDongInfo();
                 view.showMessage("Cập nhật người lao động thành công");
             }
@@ -67,7 +69,7 @@ public class NguoiLaoDongController {
         if (idStr != null) {
             int id = Integer.parseInt(idStr);
             if (dao.xoaNguoiLaoDong(id)) {
-                view.showListNguoiLaoDOng(dao.getDanhSach());
+                view.showListNguoiLaoDong(dao.getDanhSach());
                 view.clearNguoiLaoDongInfo();
                 view.showMessage("Xóa người lao động thành công");
             } else {
@@ -91,7 +93,7 @@ public class NguoiLaoDongController {
         @Override
         public void actionPerformed(ActionEvent e) {
             dao.sapXepTheoTen();
-            view.showListNguoiLaoDOng(dao.getDanhSach());
+            view.showListNguoiLaoDong(dao.getDanhSach());
         }
     }
 
@@ -99,7 +101,7 @@ public class NguoiLaoDongController {
         @Override
         public void actionPerformed(ActionEvent e) {
             dao.sapXepTheoThuNhap();
-            view.showListNguoiLaoDOng(dao.getDanhSach());
+            view.showListNguoiLaoDong(dao.getDanhSach());
         }
     }
 
