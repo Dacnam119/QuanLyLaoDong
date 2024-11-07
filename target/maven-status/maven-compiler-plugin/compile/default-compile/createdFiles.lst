@@ -8,6 +8,7 @@ nhom12\oop14\controller\NguoiLaoDongController$ClearListener.class
 nhom12\oop14\controller\NguoiLaoDongController$SortByNameListener.class
 nhom12\oop14\dao\UserDAO.class
 nhom12\oop14\utils\FileUtils.class
+nhom12\oop14\view\RegistrationView$2.class
 nhom12\oop14\controller\NguoiLaoDongController.class
 nhom12\oop14\view\NguoiLaoDongView$4.class
 nhom12\oop14\controller\LoginController.class
@@ -26,5 +27,8 @@ nhom12\oop14\App.class
 nhom12\oop14\view\LoginView$1.class
 nhom12\oop14\controller\LoginController$LoginListener.class
 nhom12\oop14\view\NguoiLaoDongView.class
+nhom12\oop14\view\RegistrationView$1.class
+nhom12\oop14\view\RegistrationView.class
+nhom12\oop14\view\LoginView$4.class
 nhom12\oop14\view\NguoiLaoDongView$5.class
 nhom12\oop14\controller\NguoiLaoDongController$AddNguoiLaoDongListener.class
