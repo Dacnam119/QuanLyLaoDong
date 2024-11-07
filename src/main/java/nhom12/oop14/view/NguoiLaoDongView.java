@@ -546,6 +546,14 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         }
     }
 
+    public String getSelectedNguoiLaoDongId() {
+    int selectedRow = nguoiLaoDongTable.getSelectedRow();
+    if (selectedRow >= 0) {
+        return nguoiLaoDongTable.getModel().getValueAt(selectedRow, 0).toString();
+    }
+    return null;
+}
+
     public void clearNguoiLaoDongInfo() {
         idField.setText("");
         hoTenField.setText("");
@@ -720,16 +728,16 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         return true;
     }
 
-    public String getSelectedNguoiLaoDongId() {
-        int selectedRow = nguoiLaoDongTable.getSelectedRow();
-        if (selectedRow != -1) {
-            // Giả sử ID là cột đầu tiên (chỉ mục cột là 0)
-            Object idValue = nguoiLaoDongTable.getValueAt(selectedRow, 0);
-            return idValue != null ? idValue.toString() : null;
-        } else {
-            // Không có hàng nào được chọn
-            return null;
-        }
-    }
+//    public String getSelectedNguoiLaoDongId() {
+//        int selectedRow = nguoiLaoDongTable.getSelectedRow();
+//        if (selectedRow != -1) {
+//            // Giả sử ID là cột đầu tiên (chỉ mục cột là 0)
+//            Object idValue = nguoiLaoDongTable.getValueAt(selectedRow, 0);
+//            return idValue != null ? idValue.toString() : null;
+//        } else {
+//            // Không có hàng nào được chọn
+//            return null;
+//        }
+//    }
 
 }
