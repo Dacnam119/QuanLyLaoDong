@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package nhom12.oop14.view;
 
 import java.awt.Dimension;
@@ -659,7 +656,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
     }
 
     private boolean validateNotEmpty(JTextField hoTenField, String tên) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
 }

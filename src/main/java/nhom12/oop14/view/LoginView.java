@@ -98,8 +98,11 @@ public class LoginView extends javax.swing.JFrame {
     public void addLoginListener(ActionListener listener) {
         loginBtn.addActionListener(listener);
     }
-    
-    public User getQuanLy() {
+    public void showLoginView() {
+    this.setVisible(true);
+}
+
+    public User getUser() {
         return new User(userNameField.getText(), 
                 String.copyValueOf(passwordField.getPassword()));
     }
