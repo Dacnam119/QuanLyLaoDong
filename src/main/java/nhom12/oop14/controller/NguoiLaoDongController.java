@@ -19,7 +19,9 @@ public class NguoiLaoDongController {
     public NguoiLaoDongController(NguoiLaoDongView view) {
         this.view = view;
         this.dao = new NguoiLaoDongDAO();
-        
+        List<NguoiLaoDong> nguoiLaoDongList = dao.getDanhSach();
+        view.showListNguoiLaoDong(nguoiLaoDongList);
+
         // Hiển thị danh sách người lao động
         view.showListNguoiLaoDong(dao.getDanhSach());
 
@@ -34,10 +36,10 @@ public class NguoiLaoDongController {
     }
 
    public void showNguoiLaoDongView() {
-    List<NguoiLaoDong> nguoiLaoDongList = dao.getDanhSach();
-    view.showListNguoiLaoDong(nguoiLaoDongList); // Load initial data before showing view
-    view.setVisible(true);
-  }
+        List<NguoiLaoDong> nguoiLaoDongList = dao.getDanhSach();
+        view.showListNguoiLaoDong(nguoiLaoDongList); // Load data before showing view
+        view.setVisible(true);
+    }
 
 
     class AddNguoiLaoDongListener implements ActionListener {

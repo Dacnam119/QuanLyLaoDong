@@ -1,16 +1,20 @@
 package nhom12.oop14.dao;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import nhom12.oop14.entity.NguoiLaoDong;
 import nhom12.oop14.entity.NguoiLaoDongXML;
 import nhom12.oop14.utils.FileUtils;
 
 public class NguoiLaoDongDAO {
-    private static final String FILE_PATH = "D:/Nam - DH/Java/QuanLyLaoDong/Data.xml"; // Đường dẫn đến file XML
+    private static final String FILE_PATH = "Data.xml"; // Đường dẫn đến file XML
     private List<NguoiLaoDong> danhSach;
 
     // Khởi tạo danh sách người lao động từ file XML
@@ -25,6 +29,20 @@ public class NguoiLaoDongDAO {
             }
         }
     }
+    private List<NguoiLaoDong> readNguoiLaoDongList() {
+        try {
+            JAXBContext context = JAXBContext.newInstance(NguoiLaoDongXML.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            NguoiLaoDongXML nguoiLaoDongXML = (NguoiLaoDongXML) unmarshaller.unmarshal(new File(FILE_PATH));
+            if (nguoiLaoDongXML != null) {
+                danhSach = nguoiLaoDongXML.getNguoiLaoDong();
+                return danhSach;
+            }
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>(); // Empty list if no data is read
+    }
 
     // Ghi danh sách người lao động vào file XML
     private void writeNguoiLaoDongList() throws IOException {
@@ -33,15 +51,9 @@ public class NguoiLaoDongDAO {
         FileUtils.writeXMLtoFile(FILE_PATH, nguoiLaoDongXML);
     }
 
-    // Đọc danh sách người lao động từ file XML
-    private List<NguoiLaoDong> readNguoiLaoDongList() {
-        NguoiLaoDongXML nguoiLaoDongXML = (NguoiLaoDongXML) FileUtils.readXMLFile(FILE_PATH, NguoiLaoDongXML.class);
-        if (nguoiLaoDongXML != null) {
-            return nguoiLaoDongXML.getNguoiLaoDong();
-        }
-        return new ArrayList<>();
-    }
 
+    public List<NguoiLaoDong> getDanhSach() { return danhSach; }
+    
     // Thêm người lao động vào danh sách và lưu vào file XML
     public void themNguoiLaoDong(NguoiLaoDong nld) throws IOException {
         int id = danhSach.size() + 1;
@@ -93,10 +105,6 @@ public class NguoiLaoDongDAO {
         writeNguoiLaoDongList(); // Ghi lại vào file XML sau khi sắp xếp
     }
 
-    // Lấy danh sách người lao động
-    public List<NguoiLaoDong> getDanhSach() {
-        return danhSach;
-    }
 
     // Đặt danh sách người lao động
     public void setDanhSach(List<NguoiLaoDong> danhSach) {

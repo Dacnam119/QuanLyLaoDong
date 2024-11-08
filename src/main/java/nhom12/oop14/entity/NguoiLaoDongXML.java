@@ -13,8 +13,10 @@ public class NguoiLaoDongXML {
     public List<NguoiLaoDong> getNguoiLaoDong() {
         return nguoiLaoDong;
     }
-
     public void setNguoiLaoDong(List<NguoiLaoDong> nguoiLaoDong) {
+        this.nguoiLaoDong = nguoiLaoDong;
+    }
+    public void getNguoiLaoDong(List<NguoiLaoDong> nguoiLaoDong) {
         this.nguoiLaoDong = nguoiLaoDong;
     }
 }

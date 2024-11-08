@@ -1,12 +1,12 @@
 package nhom12.oop14.view;
-
+import java.awt.*;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.List;
-
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,17 +29,20 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+import javax.swing.*;
 import nhom12.oop14.entity.NguoiLaoDong;
 import nhom12.oop14.dao.NguoiLaoDongDAO;
 
 public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListener, ListSelectionListener {
-
+    private JTable table;
     /**
      * Creates new form NguoiLaoDongView
      */
     public NguoiLaoDongView() {
         initComponents();
+         DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new String[]{"ID", "Họ Tên", "Giới tính", "Ngày sinh", "Nơi ở", "Hộ khẩu", "Nghề nghiệp", "Tình trạng hôn nhân", "Thu nhập", "Hình ảnh"});
+        nguoiLaoDongTable.setModel(model);
     }
 
     /**
@@ -371,7 +374,6 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void nguoiLaoDongTableAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_nguoiLaoDongTableAncestorAdded
 
     }//GEN-LAST:event_nguoiLaoDongTableAncestorAdded
@@ -532,27 +534,25 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         JOptionPane.showMessageDialog(this, message);
     }
 
-    public void showListNguoiLaoDong(List<NguoiLaoDong> list) {
-        int size = list.size();
+     public void showListNguoiLaoDong(List<NguoiLaoDong> danhSach) {
+        DefaultTableModel model = (DefaultTableModel) nguoiLaoDongTable.getModel();
+        model.setRowCount(0); // Clear existing data
 
-        Object[][] nguoilaodongs = new Object[size][10];
-        for (int i = 0; i < size; i++) {
-            nguoilaodongs[i][0] = list.get(i).getId();
-            nguoilaodongs[i][1] = list.get(i).getHoTen();
-            nguoilaodongs[i][2] = list.get(i).getGioiTinh();
-            nguoilaodongs[i][3] = list.get(i).getNgaySinh();
-            nguoilaodongs[i][4] = list.get(i).getNoiO();
-            nguoilaodongs[i][5] = list.get(i).getHoKhau();
-            nguoilaodongs[i][6] = list.get(i).getNgheNghiep();
-            nguoilaodongs[i][7] = list.get(i).getTinhTrangHonNhan();
-            nguoilaodongs[i][8] = list.get(i).getThuNhap();
-            nguoilaodongs[i][9] = list.get(i).getHinhAnh();
+        for (NguoiLaoDong nld : danhSach) {
+            Object[] rowData = {
+                nld.getId(),
+                nld.getHoTen(),
+                nld.getGioiTinh(),
+                nld.getNgaySinh(),
+                nld.getNoiO(),
+                nld.getHoKhau(),
+                nld.getNgheNghiep(),
+                nld.getTinhTrangHonNhan(),
+                nld.getThuNhap(),
+                nld.getHinhAnh() // Assuming HinhAnh is a String or ImageIcon
+            };
+            model.addRow(rowData);
         }
-
-        String[] columnNames = new String[]{
-            "ID", "Họ tên", "Giới tính", "Ngày sinh", "Nơi ở", "Hộ khẩu", "Nghề nghiệp", "Tình trạng hôn nhân", "Thu nhập", "Hình ảnh"};
-
-        nguoiLaoDongTable.setModel(new DefaultTableModel(nguoilaodongs, columnNames));
     }
     
    
