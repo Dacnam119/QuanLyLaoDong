@@ -92,7 +92,10 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 
         nguoiLaoDongTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "ID", "Họ tên", "Giới tính", "Ngày sinh", "Nơi ở", "Hộ khẩu", "Nghề nghiệp", "Tình trạng hôn nhân", "Thu nhập", "Hình ảnh"
@@ -348,21 +351,17 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 992, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -555,6 +554,8 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 
         nguoiLaoDongTable.setModel(new DefaultTableModel(nguoilaodongs, columnNames));
     }
+    
+   
 
     public void fillNguoiLaoDongFromSelectedRow() {
         // lấy chỉ số của hàng được chọn 
@@ -620,7 +621,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         hoTenField.setText(nld.getHoTen());
         gioiTinhBox.setSelectedItem(nld.getGioiTinh());
         ngaySinhField.setText("" + nld.getNgaySinh());
-        noiOField.setText(nld.getNoiO());
+        noiOField.setText((String) nld.getNoiO());
         hoKhauField.setText(nld.getHoKhau());
         ngheNghiepField.setText(nld.getNgheNghiep());
         tinhTrangHonNhanBox.setSelectedItem(nld.getTinhTrangHonNhan());
@@ -792,4 +793,8 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 //            return null;
 //        }
 //    }
+
+    public Object getTable() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

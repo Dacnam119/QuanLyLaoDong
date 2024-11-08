@@ -1,122 +1,136 @@
-    package nhom12.oop14.entity;
+package nhom12.oop14.entity;
 
 import java.awt.Image;
-    import java.io.Serializable;
-    import java.util.Date;
-    import javax.xml.bind.annotation.XmlAccessType;
-    import javax.xml.bind.annotation.XmlAccessorType;
-    import javax.xml.bind.annotation.XmlRootElement;
+import java.awt.Image;
+import java.io.Serializable;
+import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
+ @XmlRootElement(name = "employees")
+ @XmlAccessorType(XmlAccessType.FIELD)
+public class NguoiLaoDong {
+    private int id;
+    private String hoTen;
+    private String gioiTinh;
+    private Date ngaySinh;
+    private String diaChi;
+    private String diaChiThuongTru;
+    private String noiO;
+    private String hoKhau;
+    private String ngheNghiep;
+    private String tinhTrangHonNhan;
+    private double thuNhap;
+    private Image hinhAnh;
 
-    @XmlRootElement(name = "nguoiLaoDong")
-    @XmlAccessorType(XmlAccessType.FIELD)
-    public class NguoiLaoDong implements Serializable{
-        private static final long serialVersionUID = 1L;
-        private String hoTen;
-        private String gioiTinh;
-        private Date ngaySinh;
-        private String noiO;
-        private String hoKhau;
-        private String ngheNghiep;
-        private String tinhTrangHonNhan;
-        private double thuNhap;
-        private Image hinhAnh;
-        private int Id;
+    public String getNoiO() {
+        return noiO;
+    }
 
-        public NguoiLaoDong() {
-        }
+    public void setNoiO(String noiO) {
+        this.noiO = noiO;
+    }
 
-        public NguoiLaoDong(String hoTen, String gioiTinh, Date ngaySinh, String noiO, String hoKhau, String ngheNghiep, String tinhTrangHonNhan, double thuNhap, Image hinhAnh, int Id) {
-            this.hoTen = hoTen;
-            this.gioiTinh = gioiTinh;
-            this.ngaySinh = ngaySinh;
-            this.noiO = noiO;
-            this.hoKhau = hoKhau;
-            this.ngheNghiep = ngheNghiep;
-            this.tinhTrangHonNhan = tinhTrangHonNhan;
-            this.thuNhap = thuNhap;
-            this.hinhAnh = hinhAnh;
-            this.Id = Id;
-        }
+    public String getHoKhau() {
+        return hoKhau;
+    }
 
-        public String getHoTen() {
-            return hoTen;
-        }
+    public void setHoKhau(String hoKhau) {
+        this.hoKhau = hoKhau;
+    }
 
-        public void setHoTen(String hoTen) {
-            this.hoTen = hoTen;
-        }
+    // Getters và Setters
+    public int getId() {
+        return id;
+    }
 
-        public String getGioiTinh() {
-            return gioiTinh;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        public void setGioiTinh(String gioiTinh) {
-            this.gioiTinh = gioiTinh;
-        }
+    public String getHoTen() {
+        return hoTen;
+    }
 
-        public Date getNgaySinh() {
-            return ngaySinh;
-        }
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
+    }
 
-        public void setNgaySinh(Date ngaySinh) {
-            this.ngaySinh = ngaySinh;
-        }
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
 
-        public String getNoiO() {
-            return noiO;
-        }
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
 
-        public void setNoiO(String noiO) {
-            this.noiO = noiO;
-        }
+   
 
-        public String getHoKhau() {
-            return hoKhau;
-        }
+    public String getDiaChi() {
+        return diaChi;
+    }
 
-        public void setHoKhau(String hoKhau) {
-            this.hoKhau = hoKhau;
-        }
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
 
-        public String getNgheNghiep() {
-            return ngheNghiep;
-        }
+    public String getDiaChiThuongTru() {
+        return diaChiThuongTru;
+    }
 
-        public void setNgheNghiep(String ngheNghiep) {
-            this.ngheNghiep = ngheNghiep;
-        }
+    public void setDiaChiThuongTru(String diaChiThuongTru) {
+        this.diaChiThuongTru = diaChiThuongTru;
+    }
 
-        public String getTinhTrangHonNhan() {
-            return tinhTrangHonNhan;
-        }
+    public String getNgheNghiep() {
+        return ngheNghiep;
+    }
 
-        public void setTinhTrangHonNhan(String tinhTrangHonNhan) {
-            this.tinhTrangHonNhan = tinhTrangHonNhan;
-        }
+    public void setNgheNghiep(String ngheNghiep) {
+        this.ngheNghiep = ngheNghiep;
+    }
 
-        public double getThuNhap() {
-            return thuNhap;
-        }
+    public String getTinhTrangHonNhan() {
+        return tinhTrangHonNhan;
+    }
 
-        public void setThuNhap(double thuNhap) {
-            this.thuNhap = thuNhap;
-        }
+    public void setTinhTrangHonNhan(String tinhTrangHonNhan) {
+        this.tinhTrangHonNhan = tinhTrangHonNhan;
+    }
 
-        public Image getHinhAnh() {
-            return hinhAnh;
-        }
+    public double getThuNhap() {
+        return thuNhap;
+    }
 
-        public void setHinhAnh(Image hinhAnh) {
+    public void setThuNhap(double thuNhap) {
+        this.thuNhap = thuNhap;
+    }
+
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public Image getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(Image hinhAnh) {
         this.hinhAnh = hinhAnh;
     }
 
-        public int getId() {
-            return Id;
-        }
+  
 
-        public void setId(int Id) {
-            this.Id = Id;
-        }
-
+    @Override
+    public String toString() {
+        return "NguoiLaoDong [id=" + id + ", hoTen=" + hoTen + ", gioiTinh=" + gioiTinh + ", ngaySinh=" + ngaySinh +
+               ", diaChi=" + diaChi + ", diaChiThuongTru=" + diaChiThuongTru + ", ngheNghiep=" + ngheNghiep +
+               ", tinhTrangHonNhan=" + tinhTrangHonNhan + ", thuNhap=" + thuNhap + ", hinhAnh=" + hinhAnh + "]";
     }
+
+    
+}
