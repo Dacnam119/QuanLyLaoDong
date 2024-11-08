@@ -400,26 +400,36 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Chọn hình ảnh");
 
-        // Thiết lập bộ lọc để chỉ cho phép chọn file ảnh
+// Thiết lập bộ lọc để chỉ cho phép chọn file ảnh
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Image files", "jpg", "jpeg", "png", "gif");
         fileChooser.setFileFilter(filter);
 
-        // Hiển thị cửa sổ chọn file
+// Hiển thị cửa sổ chọn file
         int result = fileChooser.showOpenDialog(this);
 
-        // Kiểm tra nếu người dùng chọn file
+// Kiểm tra nếu người dùng chọn file
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
 
             // Đọc ảnh và hiển thị vào JLabel
             try {
                 BufferedImage img = ImageIO.read(selectedFile);
-                ImageIcon imageIcon = new ImageIcon(img);
-                anhLabel.setIcon(imageIcon);  // Giả sử bạn có JLabel để hiển thị ảnh
+
+                // Lấy kích thước của JLabel
+                int labelWidth = anhLabel.getWidth();
+                int labelHeight = anhLabel.getHeight();
+
+                // Thu nhỏ ảnh để vừa với JLabel
+                Image scaledImage = img.getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
+                ImageIcon imageIcon = new ImageIcon(scaledImage);
+
+                // Hiển thị ảnh thu nhỏ trong JLabel
+                anhLabel.setIcon(imageIcon);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Không thể tải ảnh.");
             }
         }
+
     }//GEN-LAST:event_anhBtnActionPerformed
 
     /**
@@ -501,45 +511,51 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 
     public void showListNguoiLaoDong(List<NguoiLaoDong> list) {
         int size = list.size();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    Object[][] nguoilaodongs = new Object[size][10];
-    for (int i = 0; i < size; i++) {
-        nguoilaodongs[i][0] = list.get(i).getId();
-        nguoilaodongs[i][1] = list.get(i).getHoTen();
-        nguoilaodongs[i][2] = list.get(i).getGioiTinh();
-        nguoilaodongs[i][3] = list.get(i).getNgaySinh();
-        nguoilaodongs[i][4] = list.get(i).getNoiO();
-        nguoilaodongs[i][5] = list.get(i).getHoKhau();
-        nguoilaodongs[i][6] = list.get(i).getNgheNghiep();
-        nguoilaodongs[i][7] = list.get(i).getTinhTrangHonNhan();
-        nguoilaodongs[i][8] = list.get(i).getThuNhap();
+        Object[][] nguoilaodongs = new Object[size][10];
+        for (int i = 0; i < size; i++) {
+            nguoilaodongs[i][0] = list.get(i).getId();
+            nguoilaodongs[i][1] = list.get(i).getHoTen();
+            nguoilaodongs[i][2] = list.get(i).getGioiTinh();
 
-        // Kiểm tra và chuyển đổi hình ảnh
-        if (list.get(i).getHinhAnh() != null) {
-            if (list.get(i).getHinhAnh() instanceof Image image) {
-                // Nếu là Image, tạo ImageIcon
-                nguoilaodongs[i][9] = new ImageIcon(image);
-            } else if (list.get(i).getIconHinhAnh() instanceof ImageIcon) {
-                // Nếu là ImageIcon, sử dụng trực tiếp
-                nguoilaodongs[i][9] = list.get(i).getHinhAnh();
+            // Định dạng ngày sinh thành chuỗi với định dạng "dd/MM/yyyy"
+            Date ngaySinh = list.get(i).getNgaySinh();
+            nguoilaodongs[i][3] = (ngaySinh != null) ? dateFormat.format(ngaySinh) : "";
+
+            nguoilaodongs[i][4] = list.get(i).getNoiO();
+            nguoilaodongs[i][5] = list.get(i).getHoKhau();
+            nguoilaodongs[i][6] = list.get(i).getNgheNghiep();
+            nguoilaodongs[i][7] = list.get(i).getTinhTrangHonNhan();
+            nguoilaodongs[i][8] = list.get(i).getThuNhap();
+
+            // Kiểm tra và chuyển đổi hình ảnh
+            if (list.get(i).getHinhAnh() != null) {
+                if (list.get(i).getHinhAnh() instanceof Image image) {
+                    // Nếu là Image, tạo ImageIcon
+                    nguoilaodongs[i][9] = new ImageIcon(image);
+                } else if (list.get(i).getIconHinhAnh() instanceof ImageIcon) {
+                    // Nếu là ImageIcon, sử dụng trực tiếp
+                    nguoilaodongs[i][9] = list.get(i).getHinhAnh();
+                } else {
+                    nguoilaodongs[i][9] = null;  // Nếu không phải Image hay ImageIcon
+                }
             } else {
-                nguoilaodongs[i][9] = null;  // Nếu không phải Image hay ImageIcon
+                nguoilaodongs[i][9] = null; // Nếu không có hình ảnh
             }
-        } else {
-            nguoilaodongs[i][9] = null; // Nếu không có hình ảnh
         }
-    }
 
-    String[] columnNames = new String[]{
-        "ID", "Họ tên", "Giới tính", "Ngày sinh", "Nơi ở", "Hộ khẩu", "Nghề nghiệp", 
-        "Tình trạng hôn nhân", "Thu nhập", "Hình ảnh"
-    };
+        String[] columnNames = new String[]{
+            "ID", "Họ tên", "Giới tính", "Ngày sinh", "Nơi ở", "Hộ khẩu", "Nghề nghiệp",
+            "Tình trạng hôn nhân", "Thu nhập", "Hình ảnh"
+        };
 
-    DefaultTableModel model = new DefaultTableModel(nguoilaodongs, columnNames);
-    nguoiLaoDongTable.setModel(model);
+        DefaultTableModel model = new DefaultTableModel(nguoilaodongs, columnNames);
+        nguoiLaoDongTable.setModel(model);
+        nguoiLaoDongTable.setRowHeight(80);
 
-    // Cài đặt CellRenderer cho cột hình ảnh (cột 9)
-    nguoiLaoDongTable.getColumnModel().getColumn(9).setCellRenderer(new ImageCellRenderer());
+        // Cài đặt CellRenderer cho cột hình ảnh (cột 9)
+        nguoiLaoDongTable.getColumnModel().getColumn(9).setCellRenderer(new ImageCellRenderer());
     }
 
     public void fillNguoiLaoDongFromSelectedRow() {
