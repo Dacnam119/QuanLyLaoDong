@@ -3,112 +3,108 @@ package nhom12.oop14.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import nhom12.oop14.dao.NguoiLaoDongDAO;
 import nhom12.oop14.entity.NguoiLaoDong;
 import nhom12.oop14.view.NguoiLaoDongView;
 
 public class NguoiLaoDongController {
-    private NguoiLaoDongView view;
-    private NguoiLaoDongDAO dao;
+    private NguoiLaoDongDAO nguoiLaoDongDAO;
+    private NguoiLaoDongView nguoiLaoDongView;
 
     public NguoiLaoDongController(NguoiLaoDongView view) {
-        this.view = view;
-        this.dao = new NguoiLaoDongDAO();
-        
-        // Hiển thị danh sách người lao động
-        view.showListNguoiLaoDong(dao.getDanhSach());
+        this.nguoiLaoDongView = view;
+        nguoiLaoDongDAO = new NguoiLaoDongDAO();
 
-        // Thêm các listener cho các nút
         view.addAddNguoiLaoDongListener(new AddNguoiLaoDongListener());
         view.addEditNguoiLaoDongListener(new EditNguoiLaoDongListener());
         view.addDeleteNguoiLaoDongListener(new DeleteNguoiLaoDongListener());
-        view.addClearListener(new ClearListener());
+        view.addClearListener(new ClearNguoiLaoDongListener());
         view.addSortNguoiLaoDongTenListener(new SortByNameListener());
         view.addSortNguoiLaoDongThuNhapListener(new SortByIncomeListener());
-        view.addListNguoiLaoDongSelectionListener(new NguoiLaoDongTableSelectionListener());
+        view.addListNguoiLaoDongSelectionListener(new ListNguoiLaoDongSelectionListener());
     }
 
     public void showNguoiLaoDongView() {
-        List<NguoiLaoDong> nguoiLaoDongList = dao.getDanhSach();
-        view.setVisible(true);
-        view.showListNguoiLaoDong(nguoiLaoDongList);
+        List<NguoiLaoDong> nguoiLaoDongList = nguoiLaoDongDAO.getDanhSach();
+        nguoiLaoDongView.setVisible(true);
+        nguoiLaoDongView.showListNguoiLaoDong(nguoiLaoDongList);
     }
 
+    // Lớp AddNguoiLaoDongListener
     class AddNguoiLaoDongListener implements ActionListener {
-        @Override
         public void actionPerformed(ActionEvent e) {
-            NguoiLaoDong nld = view.getNguoiLaoDongInfo();
+            NguoiLaoDong nld = nguoiLaoDongView.getNguoiLaoDongInfo();
             if (nld != null) {
-                dao.themNguoiLaoDong(nld);
-                view.showListNguoiLaoDong(dao.getDanhSach());
-                view.clearNguoiLaoDongInfo();
-                view.showMessage("Thêm người lao động thành công");
+                nguoiLaoDongDAO.themNguoiLaoDong(nld);
+                nguoiLaoDongView.showNguoiLaoDong(nld);
+                nguoiLaoDongView.showListNguoiLaoDong(nguoiLaoDongDAO.getDanhSach());
+                nguoiLaoDongView.showMessage("Thêm người lao động thành công!");
             }
         }
     }
 
+    // Lớp EditNguoiLaoDongListener
     class EditNguoiLaoDongListener implements ActionListener {
-        @Override
         public void actionPerformed(ActionEvent e) {
-            NguoiLaoDong nld = view.getNguoiLaoDongInfo();
+            NguoiLaoDong nld = nguoiLaoDongView.getNguoiLaoDongInfo();
             if (nld != null) {
-                dao.capNhatNguoiLaoDong(nld);
-                view.showListNguoiLaoDong(dao.getDanhSach());
-                view.clearNguoiLaoDongInfo();
-                view.showMessage("Cập nhật người lao động thành công");
+                nguoiLaoDongDAO.capNhatNguoiLaoDong(nld);
+                nguoiLaoDongView.showNguoiLaoDong(nld);
+                nguoiLaoDongView.showListNguoiLaoDong(nguoiLaoDongDAO.getDanhSach());
+                nguoiLaoDongView.showMessage("Cập nhật người lao động thành công!");
             }
         }
     }
 
-   class DeleteNguoiLaoDongListener implements ActionListener {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String idStr = view.getSelectedNguoiLaoDongId();
-        if (idStr != null) {
-            int id = Integer.parseInt(idStr);
-            if (dao.xoaNguoiLaoDong(id)) {
-                view.showListNguoiLaoDong(dao.getDanhSach());
-                view.clearNguoiLaoDongInfo();
-                view.showMessage("Xóa người lao động thành công");
-            } else {
-                view.showMessage("Không tìm thấy người lao động để xóa.");
-            }
-        } else {
-            view.showMessage("Vui lòng chọn người lao động để xóa.");
-        }
-    }
-}
-
-
-    class ClearListener implements ActionListener {
-        @Override
+    // Lớp DeleteNguoiLaoDongListener
+    class DeleteNguoiLaoDongListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            view.clearNguoiLaoDongInfo();
+            NguoiLaoDong nld = nguoiLaoDongView.getNguoiLaoDongInfo();
+            if (nld != null) {
+                if (nguoiLaoDongDAO.xoaNguoiLaoDong(nld)) {
+                    nguoiLaoDongView.clearNguoiLaoDongInfo();
+                    nguoiLaoDongView.showListNguoiLaoDong(nguoiLaoDongDAO.getDanhSach());
+                    nguoiLaoDongView.showMessage("Xóa người lao động thành công!");
+                } else {
+                    nguoiLaoDongView.showMessage("Không tìm thấy người lao động!");
+                }
+            }
         }
     }
 
+    // Lớp ClearNguoiLaoDongListener
+    class ClearNguoiLaoDongListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            nguoiLaoDongView.clearNguoiLaoDongInfo();
+        }
+    }
+
+    // Lớp SortByNameListener
     class SortByNameListener implements ActionListener {
-        @Override
         public void actionPerformed(ActionEvent e) {
-            dao.sapXepTheoTen();
-            view.showListNguoiLaoDong(dao.getDanhSach());
+            nguoiLaoDongDAO.sapXepTheoTen();
+            nguoiLaoDongView.showListNguoiLaoDong(nguoiLaoDongDAO.getDanhSach());
         }
     }
 
+    // Lớp SortByIncomeListener
     class SortByIncomeListener implements ActionListener {
-        @Override
         public void actionPerformed(ActionEvent e) {
-            dao.sapXepTheoThuNhap();
-            view.showListNguoiLaoDong(dao.getDanhSach());
+            nguoiLaoDongDAO.sapXepTheoThuNhap();
+            nguoiLaoDongView.showListNguoiLaoDong(nguoiLaoDongDAO.getDanhSach());
         }
     }
 
-    class NguoiLaoDongTableSelectionListener implements ListSelectionListener {
-        @Override
+    // Lớp ListNguoiLaoDongSelectionListener
+    class ListNguoiLaoDongSelectionListener implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
-            view.fillNguoiLaoDongFromSelectedRow();
+            nguoiLaoDongView.fillNguoiLaoDongFromSelectedRow();
         }
     }
+    
+    
 }

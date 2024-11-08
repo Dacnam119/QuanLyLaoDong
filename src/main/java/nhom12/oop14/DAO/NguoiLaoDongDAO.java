@@ -15,13 +15,13 @@ public class NguoiLaoDongDAO {
     public NguoiLaoDongDAO() {
         this.danhSach = readNguoiLaoDongList();
         if (danhSach == null) {
-            danhSach = new ArrayList<>();
+            danhSach = new ArrayList<NguoiLaoDong>();
         }
     }
 
-    private void writeNguoiLaoDongList() {
+    private void writeNguoiLaoDongList(List<NguoiLaoDong> nld) {
         NguoiLaoDongXML nguoiLaoDongXML = new NguoiLaoDongXML();
-        nguoiLaoDongXML.setNguoiLaoDong(danhSach);
+        nguoiLaoDongXML.setNguoiLaoDong(nld);
         FileUtils.writeXMLtoFile(FILE_PATH, nguoiLaoDongXML);
     }
 
@@ -29,22 +29,28 @@ public class NguoiLaoDongDAO {
      // Đọc danh sách người lao động từ file XML
     
     private List<NguoiLaoDong> readNguoiLaoDongList() {
-        NguoiLaoDongXML nguoiLaoDongXML = (NguoiLaoDongXML) FileUtils.readXMLFile(FILE_PATH, NguoiLaoDongXML.class);
+        List<NguoiLaoDong> list = new ArrayList<NguoiLaoDong>();
+        NguoiLaoDongXML nguoiLaoDongXML = (NguoiLaoDongXML) FileUtils.readXMLFile(
+                FILE_PATH, NguoiLaoDongXML.class);
         if (nguoiLaoDongXML != null) {
-            return nguoiLaoDongXML.getNguoiLaoDong();
+            list = nguoiLaoDongXML.getNguoiLaoDong();
         }
-        return new ArrayList<>();
+        return list;
     }
 
     
      // Thêm người lao động vào danh sách và lưu vào file XML
      
     public void themNguoiLaoDong(NguoiLaoDong nld) {
-        int id = danhSach.size() + 1;
+        int id = 1;
+        if (danhSach != null && danhSach.size() > 0) {
+            id = danhSach.size() + 1;
+        }
         nld.setId(id);
         danhSach.add(nld);
-        writeNguoiLaoDongList();
+        writeNguoiLaoDongList(danhSach);
     }
+    
 
   
      //Cập nhật thông tin người lao động trong danh sách và lưu vào file XML
@@ -53,7 +59,7 @@ public class NguoiLaoDongDAO {
         for (int i = 0; i < danhSach.size(); i++) {
             if (danhSach.get(i).getId() == nld.getId()) {
                 danhSach.set(i, nld);
-                writeNguoiLaoDongList();
+                writeNguoiLaoDongList(danhSach);  // Fixed to pass danhSach
                 break;
             }
         }
@@ -62,12 +68,22 @@ public class NguoiLaoDongDAO {
    
      // Xóa người lao động khỏi danh sách và lưu lại vào file XML
     
-    public boolean xoaNguoiLaoDong(int id) {
-        boolean isRemoved = danhSach.removeIf(nld -> nld.getId() == id);
-        if (isRemoved) {
-            writeNguoiLaoDongList();
+    public boolean xoaNguoiLaoDong(NguoiLaoDong nld) {
+        boolean isFound = false;
+        int size = danhSach.size();
+        for (int i = 0; i < size; i++) {
+            if (danhSach.get(i).getId() == nld.getId()) {
+                nld = danhSach.get(i);
+                isFound = true;
+                break;
+            }
         }
-        return isRemoved;
+        if (isFound) {
+            danhSach.remove(nld);
+            writeNguoiLaoDongList(danhSach);
+            return true;
+        }
+        return false;
     }
 
    
@@ -88,7 +104,7 @@ public class NguoiLaoDongDAO {
   
     public void sapXepTheoTen() {
         Collections.sort(danhSach, Comparator.comparing(NguoiLaoDong::getHoTen));
-        writeNguoiLaoDongList();
+        writeNguoiLaoDongList(danhSach);
     }
 
     
@@ -96,7 +112,7 @@ public class NguoiLaoDongDAO {
      
     public void sapXepTheoThuNhap() {
         danhSach.sort(Comparator.comparingDouble(NguoiLaoDong::getThuNhap));
-        writeNguoiLaoDongList();
+        writeNguoiLaoDongList(danhSach);
     }
 
     public List<NguoiLaoDong> getDanhSach() {
@@ -105,5 +121,9 @@ public class NguoiLaoDongDAO {
 
     public void setDanhSach(List<NguoiLaoDong> danhSach) {
         this.danhSach = danhSach;
+    }
+
+    public List<NguoiLaoDong> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
