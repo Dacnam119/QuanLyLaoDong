@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <employees>
     <employee>
-        <id>1</id>
-        <name>Nguyễn Văn An</name>
-        <gender>Nam</gender>
-        <dob>1985-04-15</dob>
-        <address>Hà Nội</address>
-        <permanent_address>235 Nguyễn Trãi, Thanh Xuân, Hà Nội</permanent_address>
-        <occupation>Kỹ sư xây dựng</occupation>
-        <marital_status>Đã kết hôn</marital_status>
-        <income>28.000.000</income>
-        <image>anh.jpg</image>
+        <Id>1</Id>
+        <hoTen>Nguyễn Văn An</hoTen>
+        <gioiTinh>Nam</gioiTinh>
+        <ngaySinh>1985-04-15</ngaySinh>
+        <noiO>Hà Nội</noiO>
+        <hoKhau>235 Nguyễn Trãi, Thanh Xuân, Hà Nội</hoKhau>
+        <ngheNghiep>Kỹ sư xây dựng</ngheNghiep>
+        <tinhTrangHonNhan>Đã kết hôn</tinhTrangHonNhan>
+        <thuNhap>28.000.000</thuNhap>
+        <hinhAnh>anh.jpg</hinhAnh>
     </employee>
     <employee>
-        <id>2</id>
-        <name>Trần Thị Bắc</name>
-        <gender>Nữ</gender>
-        <dob>1992-09-07</dob>
-        <address>TP. Hồ Chí Minh</address>
-        <permanent_address>102 Lê Lợi, Quận 1, TP. Hồ Chí Minh</permanent_address>
-        <occupation>Nhân viên kinh doanh</occupation>
-        <marital_status>Độc thân</marital_status>
-        <income>18.500.000</income>
-        <image>anh.jpg</image>
+        <Id>2</Id>
+        <hoTen>Trần Thị Bắc</hoTen>
+        <gioiTinh>Nữ</gioiTinh>
+        <ngaySinh>1992-09-07</ngaySinh>
+        <noiO>TP. Hồ Chí Minh</noiO>
+        <hoKhau>102 Lê Lợi, Quận 1, TP. Hồ Chí Minh</hoKhau>
+        <ngheNghiep>Nhân viên kinh doanh</ngheNghiep>
+        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
+        <thuNhap>18.500.000</thuNhap>
+        <hinhAnh>anh.jpg</hinhAnh>
     </employee>
     <employee>
-        <id>3</id>
-        <name>Lê Văn Chiến</name>
-        <gender>Nam</gender>
-        <dob>1978-12-02</dob>
-        <address>Hà Nội</address>
-        <permanent_address>78 Phan Đình Phùng, Ba Đình, Hà Nội</permanent_address>
-        <occupation>Bác sĩ</occupation>
-        <marital_status>Đã kết hôn</marital_status>
-        <income>42.000.000</income>
-        <image>anh.jpg</image>
+        <Id>3</Id>
+        <hoTen>Lê Văn Chiến</hoTen>
+        <gioiTinh>Nam</gioiTinh>
+        <ngaySinh>1978-12-02</ngaySinh>
+        <noiO>Hà Nội</noiO>
+        <hoKhau>78 Phan Đình Phùng, Ba Đình, Hà Nội</hoKhau>
+        <ngheNghiep>Bác sĩ</ngheNghiep>
+        <tinhTrangHonNhan>Đã kết hôn</tinhTrangHonNhan>
+        <thuNhap>42.000.000</thuNhap>
+        <hinhAnh>anh.jpg</hinhAnh>
     </employee>
     <employee>
-        <id>4</id>
-        <name>Phạm Minh Duy</name>
-        <gender>Nam</gender>
-        <dob>1989-06-25</dob>
-        <address>TP. Hồ Chí Minh</address>
-        <permanent_address>456 Hoàng Văn Thụ, Phú Nhuận, TP. Hồ Chí Minh</permanent_address>
-        <occupation>Kỹ sư phần mềm</occupation>
-        <marital_status>Độc thân</marital_status>
-        <income>35.000.000</income>
-        <image>anh.jpg</image>
+        <Id>4</Id>
+        <hoTen>Phạm Minh Duy</hoTen>
+        <gioiTinh>Nam</gioiTinh>
+        <ngaySinh>1989-06-25</ngaySinh>
+        <noiO>TP. Hồ Chí Minh</noiO>
+        <hoKhau>456 Hoàng Văn Thụ, Phú Nhuận, TP. Hồ Chí Minh</hoKhau>
+        <ngheNghiep>Kỹ sư phần mềm</ngheNghiep>
+        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
+        <thuNhap>35.000.000</thuNhap>
+        <hinhAnh>anh.jpg</hinhAnh>
     </employee>
     <employee>
-        <id>5</id>
-        <name>Đặng Thị Yến</name>
-        <gender>Nữ</gender>
-        <dob>1995-03-13</dob>
-        <address>Hà Nội</address>
-        <permanent_address>9 Cầu Giấy, Cầu Giấy, Hà Nội</permanent_address>
-        <occupation>Giáo viên tiếng Anh</occupation>
-        <marital_status>Độc thân</marital_status>
-        <income>21.000.000</income>
-        <image>anh.jpg</image>
+        <Id>5</Id>
+        <hoTen>Đặng Thị Yến</hoTen>
+        <gioiTinh>Nữ</gioiTinh>
+        <ngaySinh>1995-03-13</ngaySinh>
+        <noiO>Hà Nội</noiO>
+        <hoKhau>9 Cầu Giấy, Cầu Giấy, Hà Nội</hoKhau>
+        <ngheNghiep>Giáo viên tiếng Anh</ngheNghiep>
+        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
+        <thuNhap>21.000.000</thuNhap>
+        <hinhAnh>anh.jpg</hinhAnh>
     </employee>
 </employees>
