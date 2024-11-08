@@ -25,7 +25,7 @@ public class NguoiLaoDongDAO {
         FileUtils.writeXMLtoFile(FILE_PATH, nguoiLaoDongXML);
     }
 
-    
+   
      // Đọc danh sách người lao động từ file XML
     
     private List<NguoiLaoDong> readNguoiLaoDongList() {

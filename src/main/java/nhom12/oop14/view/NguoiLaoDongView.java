@@ -1,9 +1,9 @@
-
 package nhom12.oop14.view;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -21,13 +21,16 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import nhom12.oop14.entity.NguoiLaoDong;
 import nhom12.oop14.dao.NguoiLaoDongDAO;
-
 
 public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListener, ListSelectionListener {
 
@@ -74,6 +77,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         editNguoiLaoDongBtn = new javax.swing.JButton();
         deleteNguoiLaoDongBtn = new javax.swing.JButton();
         clearBtn = new javax.swing.JButton();
+        anhLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
         timKiemTenField = new javax.swing.JTextField();
@@ -146,6 +150,11 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         jLabel8.setText("Hình ảnh");
 
         anhBtn.setText("CHỌN ẢNH");
+        anhBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anhBtnActionPerformed(evt);
+            }
+        });
 
         addNguoiLaoDongBtn.setText("Thêm");
 
@@ -174,27 +183,21 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                                 .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(hoTenField, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ngaySinhField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(68, 68, 68))
+                            .addComponent(ngaySinhField, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hoTenField, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(thuNhapField, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(anhBtn)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,16 +217,24 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                             .addComponent(hoKhauField)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(noiOField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(addNguoiLaoDongBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(editNguoiLaoDongBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteNguoiLaoDongBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(addNguoiLaoDongBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(editNguoiLaoDongBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(deleteNguoiLaoDongBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(anhBtn)
+                .addGap(30, 30, 30)
+                .addComponent(anhLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -257,20 +268,21 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                         .addComponent(jLabel6)
                         .addComponent(tinhTrangHonNhanBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(anhBtn))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(thuNhapField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(thuNhapField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(anhBtn)
+                    .addComponent(anhLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addNguoiLaoDongBtn)
                     .addComponent(editNguoiLaoDongBtn)
                     .addComponent(deleteNguoiLaoDongBtn)
                     .addComponent(clearBtn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -339,7 +351,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(10, 10, 10)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 992, Short.MAX_VALUE))
@@ -352,13 +364,14 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(372, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
 
     private void nguoiLaoDongTableAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_nguoiLaoDongTableAncestorAdded
 
@@ -374,49 +387,76 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
 
-
-
     }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void anhBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anhBtnActionPerformed
+        // TODO add your handling code here:
+        // Tạo JFileChooser để chọn ảnh
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn hình ảnh");
+
+        // Thiết lập bộ lọc để chỉ cho phép chọn file ảnh
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image files", "jpg", "jpeg", "png", "gif");
+        fileChooser.setFileFilter(filter);
+
+        // Hiển thị cửa sổ chọn file
+        int result = fileChooser.showOpenDialog(this);
+
+        // Kiểm tra nếu người dùng chọn file
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+
+            // Đọc ảnh và hiển thị vào JLabel
+            try {
+                BufferedImage img = ImageIO.read(selectedFile);
+                ImageIcon imageIcon = new ImageIcon(img);
+                anhLabel.setIcon(imageIcon);  // Giả sử bạn có JLabel để hiển thị ảnh
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Không thể tải ảnh.");
+            }
+        }
+    }//GEN-LAST:event_anhBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-     */
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ClassNotFoundException ex) {
-        java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(NguoiLaoDongView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NguoiLaoDongView().setVisible(true);
+
+            }
+        });
     }
-    //</editor-fold>
-
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new NguoiLaoDongView().setVisible(true);
-
-        }
-    });
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNguoiLaoDongBtn;
     private javax.swing.JButton anhBtn;
+    private javax.swing.JLabel anhLabel;
     private javax.swing.JButton clearBtn;
     private javax.swing.JButton deleteNguoiLaoDongBtn;
     private javax.swing.JButton editNguoiLaoDongBtn;
@@ -450,17 +490,13 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
     private javax.swing.JComboBox<String> tinhTrangHonNhanBox;
     // End of variables declaration//GEN-END:variables
 
-    
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
 
-    public void showListNguoiLaoDOng(List<NguoiLaoDong> list) {
+    public void showListNguoiLaoDong(List<NguoiLaoDong> list) {
         int size = list.size();
-        // với bảng studentTable có 5 cột, 
-        // khởi tạo mảng 2 chiều students, trong đó:
-        // số hàng: là kích thước của list student 
-        // số cột: là 5
+
         Object[][] nguoilaodongs = new Object[size][10];
         for (int i = 0; i < size; i++) {
             nguoilaodongs[i][0] = list.get(i).getId();
@@ -495,13 +531,13 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
             tinhTrangHonNhanBox.setSelectedItem(nguoiLaoDongTable.getModel().getValueAt(row, 7).toString());
             thuNhapField.setText(nguoiLaoDongTable.getModel().getValueAt(row, 8).toString());
 
-//            Object imageObject = nguoiLaoDongTable.getModel().getValueAt(row, 9);
-//            if (imageObject instanceof ImageIcon) {
-//                ImageIcon imageIcon = (ImageIcon) imageObject;
-//                imageLabel.setIcon(imageIcon); // Hiển thị trong một JLabel (giả sử bạn có một JLabel tên là imageLabel)
-//            } else {
-//                imageLabel.setIcon(null); // Xóa ảnh nếu không có
-//            }
+            Object imageObject = nguoiLaoDongTable.getModel().getValueAt(row, 9);
+            if (imageObject instanceof ImageIcon) {
+                ImageIcon imageIcon = (ImageIcon) imageObject;
+                anhLabel.setIcon(imageIcon); // Display image in the JLabel
+            } else {
+                anhLabel.setIcon(null); // Clear the image if there is none
+            }
             // enable Edit and Delete buttons
             editNguoiLaoDongBtn.setEnabled(true);
             deleteNguoiLaoDongBtn.setEnabled(true);
@@ -509,6 +545,14 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
             addNguoiLaoDongBtn.setEnabled(false);
         }
     }
+
+    public String getSelectedNguoiLaoDongId() {
+    int selectedRow = nguoiLaoDongTable.getSelectedRow();
+    if (selectedRow >= 0) {
+        return nguoiLaoDongTable.getModel().getValueAt(selectedRow, 0).toString();
+    }
+    return null;
+}
 
     public void clearNguoiLaoDongInfo() {
         idField.setText("");
@@ -520,27 +564,41 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         ngheNghiepField.setText("");
         tinhTrangHonNhanBox.setSelectedItem("");
         thuNhapField.setText("");
-        // disable Edit and Delete buttons
+
+        // Disable Edit and Delete buttons
         editNguoiLaoDongBtn.setEnabled(false);
         deleteNguoiLaoDongBtn.setEnabled(false);
-        // enable Add button
+
+        // Enable Add button
         addNguoiLaoDongBtn.setEnabled(true);
+
+        // Clear the image
+        anhLabel.setIcon(null);
     }
 
     public void showNguoiLaoDong(NguoiLaoDong nld) {
-        idField.setText("" + nld.getId());
-        hoTenField.setText("" + nld.getHoTen());
+        idField.setText(String.valueOf(nld.getId()));
+        hoTenField.setText(nld.getHoTen());
         gioiTinhBox.setSelectedItem(nld.getGioiTinh());
         ngaySinhField.setText("" + nld.getNgaySinh());
-        noiOField.setText("" + nld.getNoiO());
-        hoKhauField.setText("" + nld.getHoKhau());
-        ngheNghiepField.setText("" + nld.getNgheNghiep());
+        noiOField.setText(nld.getNoiO());
+        hoKhauField.setText(nld.getHoKhau());
+        ngheNghiepField.setText(nld.getNgheNghiep());
         tinhTrangHonNhanBox.setSelectedItem(nld.getTinhTrangHonNhan());
-        thuNhapField.setText("" + nld.getThuNhap());
-        // enable Edit and Delete buttons
+        thuNhapField.setText(String.valueOf(nld.getThuNhap()));
+
+        // Display the image
+        if (nld.getHinhAnh() != null) {
+            anhLabel.setIcon(new ImageIcon(nld.getHinhAnh()));
+        } else {
+            anhLabel.setIcon(null);
+        }
+
+        // Enable Edit and Delete buttons
         editNguoiLaoDongBtn.setEnabled(true);
         deleteNguoiLaoDongBtn.setEnabled(true);
-        // disable Add button
+
+        // Disable Add button
         addNguoiLaoDongBtn.setEnabled(false);
     }
 
@@ -560,7 +618,13 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
             nguoilaodong.setHoKhau(hoKhauField.getText().trim());
             nguoilaodong.setNgheNghiep(ngheNghiepField.getText().trim());
             nguoilaodong.setTinhTrangHonNhan(tinhTrangHonNhanBox.getSelectedItem().toString());
-            nguoilaodong.setThuNhap(parseDouble(thuNhapField.getText().trim(), "Income"));
+            nguoilaodong.setThuNhap(parseDouble(thuNhapField.getText().trim(), "Thu nhập"));
+
+            // Handle image (if selected)
+            if (anhLabel.getIcon() != null) {
+                ImageIcon imageIcon = (ImageIcon) anhLabel.getIcon();
+                nguoilaodong.setHinhAnh(imageIcon.getImage());
+            }
 
             return nguoilaodong;
         } catch (Exception e) {
@@ -586,7 +650,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
             return true;
         } catch (Exception e) {
             dobField.requestFocus();
-            showMessage("Date of Birth không hợp lệ!");
+            showMessage("Ngày sinh không hợp lệ!");
             return false;
         }
     }
@@ -596,7 +660,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         Double income = parseDouble(incomeField.getText().trim(), "Income");
         if (income == null || income < 0) {
             incomeField.requestFocus();
-            showMessage("Income không hợp lệ, phải là số dương.");
+            showMessage("Thu nhập không hợp lệ, phải là số dương.");
             return false;
         }
         return true;
@@ -655,12 +719,25 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         nguoiLaoDongTable.getSelectionModel().addListSelectionListener(listener);
     }
 
-    private boolean validateNotEmpty(JTextField hoTenField, String tên) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    private boolean validateNotEmpty(JTextField field, String fieldName) {
+        if (field.getText().trim().isEmpty()) {
+            showMessage(fieldName + " không được để trống.");
+            field.requestFocus();
+            return false;
+        }
+        return true;
     }
 
-    public String getSelectedNguoiLaoDongId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    public String getSelectedNguoiLaoDongId() {
+//        int selectedRow = nguoiLaoDongTable.getSelectedRow();
+//        if (selectedRow != -1) {
+//            // Giả sử ID là cột đầu tiên (chỉ mục cột là 0)
+//            Object idValue = nguoiLaoDongTable.getValueAt(selectedRow, 0);
+//            return idValue != null ? idValue.toString() : null;
+//        } else {
+//            // Không có hàng nào được chọn
+//            return null;
+//        }
+//    }
 
 }
