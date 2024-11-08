@@ -1,6 +1,7 @@
 package nhom12.oop14.view;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -119,8 +120,6 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         idLabel.setText("ID");
-
-        idField.setEditable(false);
 
         jLabel1.setText("Họ tên");
 
@@ -272,10 +271,11 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                     .addComponent(jLabel7)
                     .addComponent(thuNhapField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(anhBtn)
-                    .addComponent(anhLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(anhLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(anhBtn)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addNguoiLaoDongBtn)
@@ -490,6 +490,45 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
     private javax.swing.JComboBox<String> tinhTrangHonNhanBox;
     // End of variables declaration//GEN-END:variables
 
+    private Image selectedImage;
+
+    public Image getSelectedImage() {
+        return selectedImage;
+    }
+
+    // Các phương thức getter cho các trường nhập khác
+    public String getHoTenField() {
+        return hoTenField.getText();
+    }
+
+    public String getNgaySinhField() {
+        return ngaySinhField.getText();
+    }
+
+    public String getNoiOField() {
+        return noiOField.getText();
+    }
+
+    public String getHoKhauField() {
+        return hoKhauField.getText();
+    }
+
+    public String getNgheNghiepField() {
+        return ngheNghiepField.getText();
+    }
+
+    public String getGioiTinhBox() {
+        return (String) gioiTinhBox.getSelectedItem();
+    }
+
+    public String getTinhTrangHonNhanBox() {
+        return (String) tinhTrangHonNhanBox.getSelectedItem();
+    }
+
+    public String getThuNhapField() {
+        return thuNhapField.getText();
+    }
+
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
@@ -547,12 +586,12 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
     }
 
     public String getSelectedNguoiLaoDongId() {
-    int selectedRow = nguoiLaoDongTable.getSelectedRow();
-    if (selectedRow >= 0) {
-        return nguoiLaoDongTable.getModel().getValueAt(selectedRow, 0).toString();
+        int selectedRow = nguoiLaoDongTable.getSelectedRow();
+        if (selectedRow >= 0) {
+            return nguoiLaoDongTable.getModel().getValueAt(selectedRow, 0).toString();
+        }
+        return null;
     }
-    return null;
-}
 
     public void clearNguoiLaoDongInfo() {
         idField.setText("");
@@ -728,6 +767,20 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         return true;
     }
 
+//    public void refreshTable(List<NguoiLaoDong> danhSach) {
+//        // Cập nhật bảng với dữ liệu mới từ danh sách người lao động
+//        // Giả sử bạn có một JTable tên là nguoiLaoDongTable
+//        DefaultTableModel tableModel = (DefaultTableModel) nguoiLaoDongTable.getModel();
+//        tableModel.setRowCount(0);  // Xóa các dòng cũ
+//        for (NguoiLaoDong nld : danhSach) {
+//            tableModel.addRow(new Object[]{
+//                nld.getHoTen(), nld.getGioiTinh(), nld.getNgaySinh(),
+//                nld.getNoiO(), nld.getHoKhau(), nld.getNgheNghiep(),
+//                nld.getTinhTrangHonNhan(), nld.getThuNhap(), nld.getHinhAnh()
+//            });
+//        }
+//    }
+
 //    public String getSelectedNguoiLaoDongId() {
 //        int selectedRow = nguoiLaoDongTable.getSelectedRow();
 //        if (selectedRow != -1) {
@@ -739,5 +792,4 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 //            return null;
 //        }
 //    }
-
 }
