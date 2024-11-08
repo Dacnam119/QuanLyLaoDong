@@ -115,6 +115,16 @@ public class NguoiLaoDongDAO {
         writeNguoiLaoDongList(danhSach);
     }
 
+    public List<NguoiLaoDong> searchByName(String name) {
+    List<NguoiLaoDong> result = new ArrayList<>();
+    for (NguoiLaoDong nguoi : danhSach) {
+        if (nguoi.getHoTen().toLowerCase().contains(name.toLowerCase())) {
+            result.add(nguoi);
+        }
+    }
+    return result;
+}
+    
     public List<NguoiLaoDong> getDanhSach() {
         return danhSach;
     }

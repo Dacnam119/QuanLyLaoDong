@@ -26,8 +26,10 @@ public class NguoiLaoDongController {
         view.addSortNguoiLaoDongTenListener(new SortByNameListener());
         view.addSortNguoiLaoDongThuNhapListener(new SortByIncomeListener());
         view.addListNguoiLaoDongSelectionListener(new ListNguoiLaoDongSelectionListener());
+        view.addSearchNguoiLaoDongListener(new SearchNguoiLaoDongListener());
     }
 
+  
     public void showNguoiLaoDongView() {
         List<NguoiLaoDong> nguoiLaoDongList = nguoiLaoDongDAO.getDanhSach();
         nguoiLaoDongView.setVisible(true);
@@ -99,6 +101,14 @@ public class NguoiLaoDongController {
         }
     }
 
+   class SearchNguoiLaoDongListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+        String searchText = nguoiLaoDongView.getTimKiemFieldText(); // Get the search query from the view
+        List<NguoiLaoDong> searchResults = nguoiLaoDongDAO.searchByName(searchText); // Call the DAO to search by name
+        nguoiLaoDongView.updateNguoiLaoDongTable(searchResults); // Update the table with search results
+    }
+}
+    
     // Lớp ListNguoiLaoDongSelectionListener
     class ListNguoiLaoDongSelectionListener implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {

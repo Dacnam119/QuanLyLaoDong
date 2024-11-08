@@ -1,6 +1,7 @@
 package nhom12.oop14.view;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -501,24 +502,44 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
     public void showListNguoiLaoDong(List<NguoiLaoDong> list) {
         int size = list.size();
 
-        Object[][] nguoilaodongs = new Object[size][10];
-        for (int i = 0; i < size; i++) {
-            nguoilaodongs[i][0] = list.get(i).getId();
-            nguoilaodongs[i][1] = list.get(i).getHoTen();
-            nguoilaodongs[i][2] = list.get(i).getGioiTinh();
-            nguoilaodongs[i][3] = list.get(i).getNgaySinh();
-            nguoilaodongs[i][4] = list.get(i).getNoiO();
-            nguoilaodongs[i][5] = list.get(i).getHoKhau();
-            nguoilaodongs[i][6] = list.get(i).getNgheNghiep();
-            nguoilaodongs[i][7] = list.get(i).getTinhTrangHonNhan();
-            nguoilaodongs[i][8] = list.get(i).getThuNhap();
-            nguoilaodongs[i][9] = list.get(i).getHinhAnh();
+    Object[][] nguoilaodongs = new Object[size][10];
+    for (int i = 0; i < size; i++) {
+        nguoilaodongs[i][0] = list.get(i).getId();
+        nguoilaodongs[i][1] = list.get(i).getHoTen();
+        nguoilaodongs[i][2] = list.get(i).getGioiTinh();
+        nguoilaodongs[i][3] = list.get(i).getNgaySinh();
+        nguoilaodongs[i][4] = list.get(i).getNoiO();
+        nguoilaodongs[i][5] = list.get(i).getHoKhau();
+        nguoilaodongs[i][6] = list.get(i).getNgheNghiep();
+        nguoilaodongs[i][7] = list.get(i).getTinhTrangHonNhan();
+        nguoilaodongs[i][8] = list.get(i).getThuNhap();
+
+        // Kiểm tra và chuyển đổi hình ảnh
+        if (list.get(i).getHinhAnh() != null) {
+            if (list.get(i).getHinhAnh() instanceof Image image) {
+                // Nếu là Image, tạo ImageIcon
+                nguoilaodongs[i][9] = new ImageIcon(image);
+            } else if (list.get(i).getIconHinhAnh() instanceof ImageIcon) {
+                // Nếu là ImageIcon, sử dụng trực tiếp
+                nguoilaodongs[i][9] = list.get(i).getHinhAnh();
+            } else {
+                nguoilaodongs[i][9] = null;  // Nếu không phải Image hay ImageIcon
+            }
+        } else {
+            nguoilaodongs[i][9] = null; // Nếu không có hình ảnh
         }
+    }
 
-        String[] columnNames = new String[]{
-            "ID", "Họ tên", "Giới tính", "Ngày sinh", "Nơi ở", "Hộ khẩu", "Nghề nghiệp", "Tình trạng hôn nhân", "Thu nhập", "Hình ảnh"};
+    String[] columnNames = new String[]{
+        "ID", "Họ tên", "Giới tính", "Ngày sinh", "Nơi ở", "Hộ khẩu", "Nghề nghiệp", 
+        "Tình trạng hôn nhân", "Thu nhập", "Hình ảnh"
+    };
 
-        nguoiLaoDongTable.setModel(new DefaultTableModel(nguoilaodongs, columnNames));
+    DefaultTableModel model = new DefaultTableModel(nguoilaodongs, columnNames);
+    nguoiLaoDongTable.setModel(model);
+
+    // Cài đặt CellRenderer cho cột hình ảnh (cột 9)
+    nguoiLaoDongTable.getColumnModel().getColumn(9).setCellRenderer(new ImageCellRenderer());
     }
 
     public void fillNguoiLaoDongFromSelectedRow() {
@@ -593,7 +614,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 
         // Display the image
         if (nld.getHinhAnh() != null) {
-            anhLabel.setIcon(new ImageIcon(nld.getHinhAnh()));
+            anhLabel.setIcon(nld.getIconHinhAnh());
         } else {
             anhLabel.setIcon(null);
         }
@@ -634,7 +655,6 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         } catch (Exception e) {
             showMessage(e.getMessage());
         }
-
         return null;
     }
 
@@ -661,7 +681,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 
 // Kiểm tra thu nhập hợp lệ
     private boolean validateIncome(JTextField incomeField) {
-        Double income = parseDouble(incomeField.getText().trim(), "Income");
+        Double income = parseDouble(incomeField.getText().trim(), "Thu nhập");
         if (income == null || income < 0) {
             incomeField.requestFocus();
             showMessage("Thu nhập không hợp lệ, phải là số dương.");
@@ -734,6 +754,31 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 
     public void addSearchNguoiLaoDongListener(ActionListener listener) {
         searchBtn.addActionListener(listener);  // Assuming 'searchBtn' is your search button
+    }
+
+    public String getTimKiemFieldText() {
+        return timKiemField.getText();  // Assuming timKiemField is your search text field
+    }
+
+    public void updateNguoiLaoDongTable(List<NguoiLaoDong> nguoiLaoDongList) {
+        DefaultTableModel model = (DefaultTableModel) nguoiLaoDongTable.getModel();
+        model.setRowCount(0);  // Clear existing rows
+
+        // Duyệt qua danh sách người lao động và thêm vào bảng
+        for (NguoiLaoDong nguoi : nguoiLaoDongList) {
+            model.addRow(new Object[]{
+                nguoi.getId(), // Cột ID
+                nguoi.getHoTen(), // Cột Họ tên
+                nguoi.getGioiTinh(), // Cột Giới tính
+                nguoi.getNgaySinh(), // Cột Ngày sinh
+                nguoi.getNoiO(), // Cột Nơi ở
+                nguoi.getHoKhau(), // Cột Hộ khẩu
+                nguoi.getNgheNghiep(), // Cột Nghề nghiệp
+                nguoi.getTinhTrangHonNhan(), // Cột Tình trạng hôn nhân
+                nguoi.getThuNhap(), // Cột Thu nhập
+                nguoi.getHinhAnh() // Cột Hình ảnh
+            });
+        }
     }
 
     public void updateTable(List<NguoiLaoDong> workers) {
