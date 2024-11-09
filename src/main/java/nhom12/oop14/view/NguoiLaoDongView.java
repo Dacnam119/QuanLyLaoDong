@@ -13,6 +13,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.imageio.ImageIO;
@@ -555,6 +556,11 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         return sdf.format(date);
     }
 
+    public String decformat (double number){
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        return decimalFormat.format(number);
+    }
+    
     public void showListNguoiLaoDong(List<NguoiLaoDong> list) {
         int size = list.size();
         Object[][] nguoilaodongs = new Object[size][10];
@@ -567,7 +573,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
             nguoilaodongs[i][5] = list.get(i).getHoKhau();
             nguoilaodongs[i][6] = list.get(i).getNgheNghiep();
             nguoilaodongs[i][7] = list.get(i).getTinhTrangHonNhan();
-            nguoilaodongs[i][8] = list.get(i).getThuNhap();
+            nguoilaodongs[i][8] = decformat(list.get(i).getThuNhap());
 
             // Chuyển đổi hình ảnh thành ImageIcon
             if (list.get(i).getHinhAnh() != null) {
@@ -734,7 +740,11 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                 nld.getHoKhau(), // Cột Hộ khẩu
                 nld.getNgheNghiep(), // Cột Nghề nghiệp
                 nld.getTinhTrangHonNhan(), // Cột Tình trạng hôn nhân
+<<<<<<< HEAD
                 nld.getThuNhap(), // Cột Thu nhập
+=======
+                decformat(nld.getThuNhap()), // Cột Thu nhập
+>>>>>>> huy
                 imageIcon // Cột Hình ảnh (ImageIcon)
             });
         }
