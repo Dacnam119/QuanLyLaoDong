@@ -1,7 +1,7 @@
 package nhom12.oop14;
 
+import nhom12.oop14.DAO.UserDAO;
 import nhom12.oop14.controller.LoginController;
-import nhom12.oop14.dao.UserDAO;
 import nhom12.oop14.entity.User;
 import nhom12.oop14.view.LoginView;
 import org.junit.jupiter.api.BeforeEach;

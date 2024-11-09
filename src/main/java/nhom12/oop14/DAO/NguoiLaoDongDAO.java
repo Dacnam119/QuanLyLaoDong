@@ -15,7 +15,8 @@ import nhom12.oop14.utils.FileUtils;
 
 public class NguoiLaoDongDAO {
 
-    private static final String FILE_PATH = "Data.xml"; // Đường dẫn đến file XML
+    private static final String FILE_PATH = "Data.xml";
+    ; // Đường dẫn đến file XML
     private List<NguoiLaoDong> danhSach;
 
     // Khởi tạo danh sách người lao động từ file XML
@@ -34,11 +35,17 @@ public class NguoiLaoDongDAO {
     }
 
     private List<NguoiLaoDong> readNguoiLaoDongList() {
-        System.out.println("0");
         try {
+            // Sử dụng đường dẫn tương đối từ thư mục gốc của dự án
+            File file = new File(FILE_PATH);
+            if (!file.exists()) {
+                System.out.println("Không tìm thấy file XML: " + FILE_PATH);
+                return new ArrayList<>();
+            }
+
             JAXBContext context = JAXBContext.newInstance(NguoiLaoDongXML.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            NguoiLaoDongXML nguoiLaoDongXML = (NguoiLaoDongXML) unmarshaller.unmarshal(new File(FILE_PATH));
+            NguoiLaoDongXML nguoiLaoDongXML = (NguoiLaoDongXML) unmarshaller.unmarshal(file);
             if (nguoiLaoDongXML != null) {
                 danhSach = nguoiLaoDongXML.getNguoiLaoDong();
                 return danhSach;
@@ -46,7 +53,7 @@ public class NguoiLaoDongDAO {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        return new ArrayList<>(); // Empty list if no data is read
+        return new ArrayList<>(); // Return empty list if no data is read
     }
 
     // Ghi danh sách người lao động vào file XML
