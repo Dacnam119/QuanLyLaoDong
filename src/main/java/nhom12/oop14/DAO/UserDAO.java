@@ -1,4 +1,4 @@
-package nhom12.oop14.dao;
+package nhom12.oop14.DAO;
 
 import nhom12.oop14.entity.User;
 

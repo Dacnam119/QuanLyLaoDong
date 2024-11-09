@@ -1,63 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <employees>
     <employee>
-        <Id>1</Id>
-        <hoTen>Nguyễn Văn An</hoTen>
-        <gioiTinh>Nam</gioiTinh>
-        <ngaySinh>1985-04-15</ngaySinh>
-        <noiO>Hà Nội</noiO>
-        <hoKhau>235 Nguyễn Trãi, Thanh Xuân, Hà Nội</hoKhau>
-        <ngheNghiep>Kỹ sư xây dựng</ngheNghiep>
-        <tinhTrangHonNhan>Đã kết hôn</tinhTrangHonNhan>
-        <thuNhap>28.000.000</thuNhap>
-        <hinhAnh>anh.jpg</hinhAnh>
+        <id>6</id>
+        <hoTen>d</hoTen>
+        <gioiTinh>Nữ</gioiTinh>
+        <ngaySinh>1999-12-12T00:00:00+07:00</ngaySinh>
+        <noiO>a</noiO>
+        <hoKhau>a</hoKhau>
+        <ngheNghiep>a</ngheNghiep>
+        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
+        <thuNhap>12.0</thuNhap>
     </employee>
     <employee>
-        <Id>2</Id>
+        <id>2</id>
         <hoTen>Trần Thị Bắc</hoTen>
         <gioiTinh>Nữ</gioiTinh>
-        <ngaySinh>1992-09-07</ngaySinh>
+        <ngaySinh>1992-09-07T00:00:00+07:00</ngaySinh>
         <noiO>TP. Hồ Chí Minh</noiO>
         <hoKhau>102 Lê Lợi, Quận 1, TP. Hồ Chí Minh</hoKhau>
         <ngheNghiep>Nhân viên kinh doanh</ngheNghiep>
         <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
-        <thuNhap>18.500.000</thuNhap>
-        <hinhAnh>anh.jpg</hinhAnh>
+        <thuNhap>1.85E7</thuNhap>
     </employee>
     <employee>
-        <Id>3</Id>
-        <hoTen>Lê Văn Chiến</hoTen>
-        <gioiTinh>Nam</gioiTinh>
-        <ngaySinh>1978-12-02</ngaySinh>
-        <noiO>Hà Nội</noiO>
-        <hoKhau>78 Phan Đình Phùng, Ba Đình, Hà Nội</hoKhau>
-        <ngheNghiep>Bác sĩ</ngheNghiep>
-        <tinhTrangHonNhan>Đã kết hôn</tinhTrangHonNhan>
-        <thuNhap>42.000.000</thuNhap>
-        <hinhAnh>anh.jpg</hinhAnh>
-    </employee>
-    <employee>
-        <Id>4</Id>
-        <hoTen>Phạm Minh Duy</hoTen>
-        <gioiTinh>Nam</gioiTinh>
-        <ngaySinh>1989-06-25</ngaySinh>
-        <noiO>TP. Hồ Chí Minh</noiO>
-        <hoKhau>456 Hoàng Văn Thụ, Phú Nhuận, TP. Hồ Chí Minh</hoKhau>
-        <ngheNghiep>Kỹ sư phần mềm</ngheNghiep>
-        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
-        <thuNhap>35.000.000</thuNhap>
-        <hinhAnh>anh.jpg</hinhAnh>
-    </employee>
-    <employee>
-        <Id>5</Id>
+        <id>5</id>
         <hoTen>Đặng Thị Yến</hoTen>
         <gioiTinh>Nữ</gioiTinh>
-        <ngaySinh>1995-03-13</ngaySinh>
+        <ngaySinh>1995-03-13T00:00:00+07:00</ngaySinh>
         <noiO>Hà Nội</noiO>
         <hoKhau>9 Cầu Giấy, Cầu Giấy, Hà Nội</hoKhau>
         <ngheNghiep>Giáo viên tiếng Anh</ngheNghiep>
         <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
-        <thuNhap>21.000.000</thuNhap>
-        <hinhAnh>anh.jpg</hinhAnh>
+        <thuNhap>2.1E7</thuNhap>
+    </employee>
+    <employee>
+        <id>1</id>
+        <hoTen>Nguyễn Văn An</hoTen>
+        <gioiTinh>Nam</gioiTinh>
+        <ngaySinh>1985-04-15T00:00:00+07:00</ngaySinh>
+        <noiO>Hà Nội</noiO>
+        <hoKhau>235 Nguyễn Trãi, Thanh Xuân, Hà Nội</hoKhau>
+        <ngheNghiep>Kỹ sư xây dựng</ngheNghiep>
+        <tinhTrangHonNhan>Đã kết hôn</tinhTrangHonNhan>
+        <thuNhap>2.8E7</thuNhap>
+    </employee>
+    <employee>
+        <id>4</id>
+        <hoTen>Phạm Minh Duy</hoTen>
+        <gioiTinh>Nam</gioiTinh>
+        <ngaySinh>1989-06-25T00:00:00+07:00</ngaySinh>
+        <noiO>TP. Hồ Chí Minh</noiO>
+        <hoKhau>456 Hoàng Văn Thụ, Phú Nhuận, TP. Hồ Chí Minh</hoKhau>
+        <ngheNghiep>Kỹ sư phần mềm</ngheNghiep>
+        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
+        <thuNhap>3.5E7</thuNhap>
+    </employee>
+    <employee>
+        <id>3</id>
+        <hoTen>Lê Văn Chiến</hoTen>
+        <gioiTinh>Nam</gioiTinh>
+        <ngaySinh>1978-12-02T00:00:00+07:00</ngaySinh>
+        <noiO>Hà Nội</noiO>
+        <hoKhau>78 Phan Đình Phùng, Ba Đình, Hà Nội</hoKhau>
+        <ngheNghiep>Bác sĩ</ngheNghiep>
+        <tinhTrangHonNhan>Đã kết hôn</tinhTrangHonNhan>
+        <thuNhap>4.2E7</thuNhap>
     </employee>
 </employees>

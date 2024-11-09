@@ -2,10 +2,13 @@ package nhom12.oop14.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import nhom12.oop14.dao.NguoiLaoDongDAO;
+import nhom12.oop14.DAO.NguoiLaoDongDAO;
 import nhom12.oop14.entity.NguoiLaoDong;
 import nhom12.oop14.view.NguoiLaoDongView;
 
@@ -16,7 +19,9 @@ public class NguoiLaoDongController {
     public NguoiLaoDongController(NguoiLaoDongView view) {
         this.view = view;
         this.dao = new NguoiLaoDongDAO();
-        
+        List<NguoiLaoDong> nguoiLaoDongList = dao.getDanhSach();
+        view.showListNguoiLaoDong(nguoiLaoDongList);
+
         // Hiển thị danh sách người lao động
         view.showListNguoiLaoDong(dao.getDanhSach());
 
@@ -28,20 +33,27 @@ public class NguoiLaoDongController {
         view.addSortNguoiLaoDongTenListener(new SortByNameListener());
         view.addSortNguoiLaoDongThuNhapListener(new SortByIncomeListener());
         view.addListNguoiLaoDongSelectionListener(new NguoiLaoDongTableSelectionListener());
+        //view.searchBtnActionPerformed(new SearchByName());
     }
 
-    public void showNguoiLaoDongView() {
+
+   public void showNguoiLaoDongView() {
         List<NguoiLaoDong> nguoiLaoDongList = dao.getDanhSach();
+        view.showListNguoiLaoDong(nguoiLaoDongList); // Load data before showing view
         view.setVisible(true);
-        view.showListNguoiLaoDong(nguoiLaoDongList);
     }
+
 
     class AddNguoiLaoDongListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             NguoiLaoDong nld = view.getNguoiLaoDongInfo();
             if (nld != null) {
-                dao.themNguoiLaoDong(nld);
+                try {
+                    dao.themNguoiLaoDong(nld);
+                } catch (IOException ex) {
+                    Logger.getLogger(NguoiLaoDongController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 view.showListNguoiLaoDong(dao.getDanhSach());
                 view.clearNguoiLaoDongInfo();
                 view.showMessage("Thêm người lao động thành công");
@@ -54,7 +66,11 @@ public class NguoiLaoDongController {
         public void actionPerformed(ActionEvent e) {
             NguoiLaoDong nld = view.getNguoiLaoDongInfo();
             if (nld != null) {
-                dao.capNhatNguoiLaoDong(nld);
+                try {
+                    dao.capNhatNguoiLaoDong(nld);
+                } catch (IOException ex) {
+                    Logger.getLogger(NguoiLaoDongController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 view.showListNguoiLaoDong(dao.getDanhSach());
                 view.clearNguoiLaoDongInfo();
                 view.showMessage("Cập nhật người lao động thành công");
@@ -68,12 +84,16 @@ public class NguoiLaoDongController {
         String idStr = view.getSelectedNguoiLaoDongId();
         if (idStr != null) {
             int id = Integer.parseInt(idStr);
-            if (dao.xoaNguoiLaoDong(id)) {
-                view.showListNguoiLaoDong(dao.getDanhSach());
-                view.clearNguoiLaoDongInfo();
-                view.showMessage("Xóa người lao động thành công");
-            } else {
-                view.showMessage("Không tìm thấy người lao động để xóa.");
+            try {
+                if (dao.xoaNguoiLaoDong(id)) {
+                    view.showListNguoiLaoDong(dao.getDanhSach());
+                    view.clearNguoiLaoDongInfo();
+                    view.showMessage("Xóa người lao động thành công");
+                } else {
+                    view.showMessage("Không tìm thấy người lao động để xóa.");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(NguoiLaoDongController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             view.showMessage("Vui lòng chọn người lao động để xóa.");
@@ -92,7 +112,11 @@ public class NguoiLaoDongController {
     class SortByNameListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            dao.sapXepTheoTen();
+            try {
+                dao.sapXepTheoTen();
+            } catch (IOException ex) {
+                Logger.getLogger(NguoiLaoDongController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             view.showListNguoiLaoDong(dao.getDanhSach());
         }
     }
@@ -100,7 +124,11 @@ public class NguoiLaoDongController {
     class SortByIncomeListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            dao.sapXepTheoThuNhap();
+            try {
+                dao.sapXepTheoThuNhap();
+            } catch (IOException ex) {
+                Logger.getLogger(NguoiLaoDongController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             view.showListNguoiLaoDong(dao.getDanhSach());
         }
     }
