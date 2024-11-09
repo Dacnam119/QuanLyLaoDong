@@ -483,36 +483,26 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Chọn hình ảnh");
 
-// Thiết lập bộ lọc để chỉ cho phép chọn file ảnh
+        // Thiết lập bộ lọc để chỉ cho phép chọn file ảnh
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Image files", "jpg", "jpeg", "png", "gif");
         fileChooser.setFileFilter(filter);
 
-// Hiển thị cửa sổ chọn file
+        // Hiển thị cửa sổ chọn file
         int result = fileChooser.showOpenDialog(this);
 
-// Kiểm tra nếu người dùng chọn file
+        // Kiểm tra nếu người dùng chọn file
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
 
             // Đọc ảnh và hiển thị vào JLabel
             try {
                 BufferedImage img = ImageIO.read(selectedFile);
-
-                // Lấy kích thước của JLabel
-                int labelWidth = anhLabel.getWidth();
-                int labelHeight = anhLabel.getHeight();
-
-                // Thu nhỏ ảnh để vừa với JLabel
-                Image scaledImage = img.getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
-                ImageIcon imageIcon = new ImageIcon(scaledImage);
-
-                // Hiển thị ảnh thu nhỏ trong JLabel
-                anhLabel.setIcon(imageIcon);
+                ImageIcon imageIcon = new ImageIcon(img);
+                anhLabel.setIcon(imageIcon); // Giả sử bạn có JLabel để hiển thị ảnh
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Không thể tải ảnh.");
             }
         }
-
     }// GEN-LAST:event_anhBtnActionPerformed
 
     /**
@@ -651,7 +641,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
             nguoilaodongs[i][0] = list.get(i).getId();
             nguoilaodongs[i][1] = list.get(i).getHoTen();
             nguoilaodongs[i][2] = list.get(i).getGioiTinh();
-            nguoilaodongs[i][3] = formatted(list.get(i).getNgaySinh());
+            nguoilaodongs[i][3] = list.get(i).getNgaySinh();
             nguoilaodongs[i][4] = list.get(i).getNoiO();
             nguoilaodongs[i][5] = list.get(i).getHoKhau();
             nguoilaodongs[i][6] = list.get(i).getNgheNghiep();
@@ -896,31 +886,6 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         return true;
     }
 
-    // public void refreshTable(List<NguoiLaoDong> danhSach) {
-    // // Cập nhật bảng với dữ liệu mới từ danh sách người lao động
-    // // Giả sử bạn có một JTable tên là nguoiLaoDongTable
-    // DefaultTableModel tableModel = (DefaultTableModel)
-    // nguoiLaoDongTable.getModel();
-    // tableModel.setRowCount(0); // Xóa các dòng cũ
-    // for (NguoiLaoDong nld : danhSach) {
-    // tableModel.addRow(new Object[]{
-    // nld.getHoTen(), nld.getGioiTinh(), nld.getNgaySinh(),
-    // nld.getNoiO(), nld.getHoKhau(), nld.getNgheNghiep(),
-    // nld.getTinhTrangHonNhan(), nld.getThuNhap(), nld.getHinhAnh()
-    // });
-    // }
-    // }
-    // public String getSelectedNguoiLaoDongId() {
-    // int selectedRow = nguoiLaoDongTable.getSelectedRow();
-    // if (selectedRow != -1) {
-    // // Giả sử ID là cột đầu tiên (chỉ mục cột là 0)
-    // Object idValue = nguoiLaoDongTable.getValueAt(selectedRow, 0);
-    // return idValue != null ? idValue.toString() : null;
-    // } else {
-    // // Không có hàng nào được chọn
-    // return null;
-    // }
-    // }
     public Object getTable() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
         // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
