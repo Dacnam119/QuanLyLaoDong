@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import nhom12.oop14.dao.NguoiLaoDongDAO;
+import nhom12.oop14.DAO.NguoiLaoDongDAO;
 import nhom12.oop14.entity.NguoiLaoDong;
 import nhom12.oop14.view.NguoiLaoDongView;
 
@@ -33,7 +33,9 @@ public class NguoiLaoDongController {
         view.addSortNguoiLaoDongTenListener(new SortByNameListener());
         view.addSortNguoiLaoDongThuNhapListener(new SortByIncomeListener());
         view.addListNguoiLaoDongSelectionListener(new NguoiLaoDongTableSelectionListener());
+        //view.searchBtnActionPerformed(new SearchByName());
     }
+
 
    public void showNguoiLaoDongView() {
         List<NguoiLaoDong> nguoiLaoDongList = dao.getDanhSach();

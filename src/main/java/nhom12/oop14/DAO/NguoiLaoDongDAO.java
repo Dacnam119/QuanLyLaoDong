@@ -1,4 +1,4 @@
-package nhom12.oop14.dao;
+package nhom12.oop14.DAO;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,12 +24,16 @@ public class NguoiLaoDongDAO {
             danhSach = new ArrayList<>(); // Nếu không có dữ liệu, khởi tạo danh sách trống
         } else {
             System.out.println("Danh sách người lao động từ file XML:");
+            System.out.println(danhSach.size() + " người lao động");
             for (NguoiLaoDong nld : danhSach) {
-                System.out.println(nld); // In từng người lao động để kiểm tra
+                // System.out.println(nld); // In từng người lao động để kiểm tra
+                System.out.println(nld.toString());
             }
         }
     }
+
     private List<NguoiLaoDong> readNguoiLaoDongList() {
+        System.out.println("0");
         try {
             JAXBContext context = JAXBContext.newInstance(NguoiLaoDongXML.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -51,9 +55,10 @@ public class NguoiLaoDongDAO {
         FileUtils.writeXMLtoFile(FILE_PATH, nguoiLaoDongXML);
     }
 
+    public List<NguoiLaoDong> getDanhSach() {
+        return danhSach;
+    }
 
-    public List<NguoiLaoDong> getDanhSach() { return danhSach; }
-    
     // Thêm người lao động vào danh sách và lưu vào file XML
     public void themNguoiLaoDong(NguoiLaoDong nld) throws IOException {
         int id = danhSach.size() + 1;
@@ -104,7 +109,6 @@ public class NguoiLaoDongDAO {
         danhSach.sort(Comparator.comparingDouble(NguoiLaoDong::getThuNhap));
         writeNguoiLaoDongList(); // Ghi lại vào file XML sau khi sắp xếp
     }
-
 
     // Đặt danh sách người lao động
     public void setDanhSach(List<NguoiLaoDong> danhSach) {
