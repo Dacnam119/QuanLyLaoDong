@@ -740,11 +740,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                 nld.getHoKhau(), // Cột Hộ khẩu
                 nld.getNgheNghiep(), // Cột Nghề nghiệp
                 nld.getTinhTrangHonNhan(), // Cột Tình trạng hôn nhân
-<<<<<<< HEAD
-                nld.getThuNhap(), // Cột Thu nhập
-=======
                 decformat(nld.getThuNhap()), // Cột Thu nhập
->>>>>>> huy
                 imageIcon // Cột Hình ảnh (ImageIcon)
             });
         }
