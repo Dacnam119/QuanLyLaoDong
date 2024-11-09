@@ -12,6 +12,17 @@
         <thuNhap>12.0</thuNhap>
     </employee>
     <employee>
+        <id>7</id>
+        <hoTen>nam</hoTen>
+        <gioiTinh>Nam</gioiTinh>
+        <ngaySinh>2000-09-11T00:00:00+07:00</ngaySinh>
+        <noiO>hà nội</noiO>
+        <hoKhau>hà đông hà nội</hoKhau>
+        <ngheNghiep>sinh viên</ngheNghiep>
+        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
+        <thuNhap>10000.0</thuNhap>
+    </employee>
+    <employee>
         <id>2</id>
         <hoTen>Trần Thị Bắc</hoTen>
         <gioiTinh>Nữ</gioiTinh>
