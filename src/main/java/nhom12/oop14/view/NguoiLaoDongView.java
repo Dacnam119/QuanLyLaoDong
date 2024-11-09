@@ -77,7 +77,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         anhLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
-        timKiemTenField = new javax.swing.JTextField();
+        timKiemField = new javax.swing.JTextField();
         searchBtn = new javax.swing.JButton();
         sortNguoiLaoDongTenBtn = new javax.swing.JButton();
         sortNguoiLaoDongThuNhapBtn = new javax.swing.JButton();
@@ -288,9 +288,9 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 
         label1.setText("Tìm kiếm theo tên");
 
-        timKiemTenField.addActionListener(new java.awt.event.ActionListener() {
+        timKiemField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                timKiemTenFieldActionPerformed(evt);
+                timKiemFieldActionPerformed(evt);
             }
         });
 
@@ -315,7 +315,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                         .addContainerGap()
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(timKiemTenField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(timKiemField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -331,7 +331,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(timKiemTenField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(timKiemField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(searchBtn))
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
@@ -375,11 +375,14 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         // TODO add your handling code here:
     }// GEN-LAST:event_gioiTinhBoxActionPerformed
 
-    private void timKiemTenFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_timKiemTenFieldActionPerformed
+    
+    private void timKiemFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timKiemFieldActionPerformed
         // TODO add your handling code here:
-    }// GEN-LAST:event_timKiemTenFieldActionPerformed
+    }//GEN-LAST:event_timKiemFieldActionPerformed
 
+    
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_searchBtnActionPerformed
+         
     }// GEN-LAST:event_searchBtnActionPerformed
 
     private void anhBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_anhBtnActionPerformed
@@ -497,7 +500,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
     private javax.swing.JButton sortNguoiLaoDongTenBtn;
     private javax.swing.JButton sortNguoiLaoDongThuNhapBtn;
     private javax.swing.JTextField thuNhapField;
-    private javax.swing.JTextField timKiemTenField;
+    private javax.swing.JTextField timKiemField;
     private javax.swing.JComboBox<String> tinhTrangHonNhanBox;
     // End of variables declaration//GEN-END:variables
 
@@ -538,6 +541,10 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 
     public String getThuNhapField() {
         return thuNhapField.getText();
+    }
+    
+    public String getTimKiemFieldText() {
+        return timKiemField.getText();  // Assuming timKiemField is your search text field
     }
 
     public void showMessage(String message) {
@@ -707,6 +714,28 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         return null;
     }
 
+     public void updateNguoiLaoDongTable(List<NguoiLaoDong> nguoiLaoDongList) {
+        DefaultTableModel model = (DefaultTableModel) nguoiLaoDongTable.getModel();
+        model.setRowCount(0);  // Clear existing rows
+
+        // Duyệt qua danh sách người lao động và thêm vào bảng
+        for (NguoiLaoDong nguoi : nguoiLaoDongList) {
+            model.addRow(new Object[]{
+                nguoi.getId(), // Cột ID
+                nguoi.getHoTen(), // Cột Họ tên
+                nguoi.getGioiTinh(), // Cột Giới tính
+                nguoi.getNgaySinh(), // Cột Ngày sinh
+                nguoi.getNoiO(), // Cột Nơi ở
+                nguoi.getHoKhau(), // Cột Hộ khẩu
+                nguoi.getNgheNghiep(), // Cột Nghề nghiệp
+                nguoi.getTinhTrangHonNhan(), // Cột Tình trạng hôn nhân
+                nguoi.getThuNhap(), // Cột Thu nhập
+                nguoi.getHinhAnh() // Cột Hình ảnh
+            });
+        }
+    }
+
+    
     private boolean validateFields() {
         return validateNotEmpty(hoTenField, "Tên")
                 && validateNotEmpty(noiOField, "Nơi ở")
@@ -786,6 +815,10 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
 
     public void addSortNguoiLaoDongTenListener(ActionListener listener) {
         sortNguoiLaoDongTenBtn.addActionListener(listener);
+    }
+    
+    public void addSearchNguoiLaoDongListener(ActionListener listener) {
+        searchBtn.addActionListener(listener);  // Assuming 'searchBtn' is your search button
     }
 
     public void addListNguoiLaoDongSelectionListener(ListSelectionListener listener) {

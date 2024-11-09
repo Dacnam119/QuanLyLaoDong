@@ -14,6 +14,7 @@ import nhom12.oop14.entity.NguoiLaoDongXML;
 import nhom12.oop14.utils.FileUtils;
 
 public class NguoiLaoDongDAO {
+
     private static final String FILE_PATH = "Data.xml"; // Đường dẫn đến file XML
     private List<NguoiLaoDong> danhSach;
 
@@ -88,14 +89,14 @@ public class NguoiLaoDongDAO {
     }
 
     // Tìm kiếm người lao động theo tên
-    public List<NguoiLaoDong> timNguoiLaoDongTheoTen(String hoTen) {
-        List<NguoiLaoDong> ketQua = new ArrayList<>();
-        for (NguoiLaoDong nld : danhSach) {
-            if (nld.getHoTen().equalsIgnoreCase(hoTen)) {
-                ketQua.add(nld);
+    public List<NguoiLaoDong> searchByName(String name) {
+        List<NguoiLaoDong> result = new ArrayList<>();
+        for (NguoiLaoDong nguoi : danhSach) {
+            if (nguoi.getHoTen().toLowerCase().contains(name.toLowerCase())) {
+                result.add(nguoi);
             }
         }
-        return ketQua;
+        return result;
     }
 
     // Sắp xếp người lao động theo tên

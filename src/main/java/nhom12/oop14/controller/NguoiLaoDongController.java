@@ -13,6 +13,7 @@ import nhom12.oop14.entity.NguoiLaoDong;
 import nhom12.oop14.view.NguoiLaoDongView;
 
 public class NguoiLaoDongController {
+
     private NguoiLaoDongView view;
     private NguoiLaoDongDAO dao;
 
@@ -33,18 +34,18 @@ public class NguoiLaoDongController {
         view.addSortNguoiLaoDongTenListener(new SortByNameListener());
         view.addSortNguoiLaoDongThuNhapListener(new SortByIncomeListener());
         view.addListNguoiLaoDongSelectionListener(new NguoiLaoDongTableSelectionListener());
-        //view.searchBtnActionPerformed(new SearchByName());
+//        view.searchBtnActionPerformed(new SearchByName());
+        view.addSearchNguoiLaoDongListener(new SearchNguoiLaoDongListener());
     }
 
-
-   public void showNguoiLaoDongView() {
+    public void showNguoiLaoDongView() {
         List<NguoiLaoDong> nguoiLaoDongList = dao.getDanhSach();
         view.showListNguoiLaoDong(nguoiLaoDongList); // Load data before showing view
         view.setVisible(true);
     }
 
-
     class AddNguoiLaoDongListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             NguoiLaoDong nld = view.getNguoiLaoDongInfo();
@@ -62,6 +63,7 @@ public class NguoiLaoDongController {
     }
 
     class EditNguoiLaoDongListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             NguoiLaoDong nld = view.getNguoiLaoDongInfo();
@@ -78,31 +80,33 @@ public class NguoiLaoDongController {
         }
     }
 
-   class DeleteNguoiLaoDongListener implements ActionListener {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String idStr = view.getSelectedNguoiLaoDongId();
-        if (idStr != null) {
-            int id = Integer.parseInt(idStr);
-            try {
-                if (dao.xoaNguoiLaoDong(id)) {
-                    view.showListNguoiLaoDong(dao.getDanhSach());
-                    view.clearNguoiLaoDongInfo();
-                    view.showMessage("Xóa người lao động thành công");
-                } else {
-                    view.showMessage("Không tìm thấy người lao động để xóa.");
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(NguoiLaoDongController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            view.showMessage("Vui lòng chọn người lao động để xóa.");
-        }
-    }
-}
+    class DeleteNguoiLaoDongListener implements ActionListener {
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String idStr = view.getSelectedNguoiLaoDongId();
+            if (idStr != null) {
+                int id = Integer.parseInt(idStr);
+                try {
+                    if (dao.xoaNguoiLaoDong(id)) {
+                        view.showListNguoiLaoDong(dao.getDanhSach());
+                        view.clearNguoiLaoDongInfo();
+                        view.showMessage("Xóa người lao động thành công");
+                    } else {
+                        view.showMessage("Không tìm thấy người lao động để xóa.");
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(NguoiLaoDongController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                view.showMessage("Vui lòng chọn người lao động để xóa.");
+            }
+        }
+
+    }
 
     class ClearListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             view.clearNguoiLaoDongInfo();
@@ -110,6 +114,7 @@ public class NguoiLaoDongController {
     }
 
     class SortByNameListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -122,6 +127,7 @@ public class NguoiLaoDongController {
     }
 
     class SortByIncomeListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -134,9 +140,19 @@ public class NguoiLaoDongController {
     }
 
     class NguoiLaoDongTableSelectionListener implements ListSelectionListener {
+
         @Override
         public void valueChanged(ListSelectionEvent e) {
             view.fillNguoiLaoDongFromSelectedRow();
         }
     }
+    
+    class SearchNguoiLaoDongListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+        String searchText = view.getTimKiemFieldText(); // Get the search query from the view
+        List<NguoiLaoDong> searchResults = dao.searchByName(searchText); // Call the DAO to search by name
+        view.updateNguoiLaoDongTable(searchResults); // Update the table with search results
+    }}
+
+   
 }

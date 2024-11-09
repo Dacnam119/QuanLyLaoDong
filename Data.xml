@@ -1,15 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <employees>
     <employee>
-        <id>3</id>
-        <hoTen>Lê Văn Chiến</hoTen>
-        <gioiTinh>Nam</gioiTinh>
-        <ngaySinh>1978-12-02T00:00:00+07:00</ngaySinh>
+        <id>6</id>
+        <hoTen>d</hoTen>
+        <gioiTinh>Nữ</gioiTinh>
+        <ngaySinh>1999-12-12T00:00:00+07:00</ngaySinh>
+        <noiO>a</noiO>
+        <hoKhau>a</hoKhau>
+        <ngheNghiep>a</ngheNghiep>
+        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
+        <thuNhap>12.0</thuNhap>
+    </employee>
+    <employee>
+        <id>2</id>
+        <hoTen>Trần Thị Bắc</hoTen>
+        <gioiTinh>Nữ</gioiTinh>
+        <ngaySinh>1992-09-07T00:00:00+07:00</ngaySinh>
+        <noiO>TP. Hồ Chí Minh</noiO>
+        <hoKhau>102 Lê Lợi, Quận 1, TP. Hồ Chí Minh</hoKhau>
+        <ngheNghiep>Nhân viên kinh doanh</ngheNghiep>
+        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
+        <thuNhap>1.85E7</thuNhap>
+    </employee>
+    <employee>
+        <id>5</id>
+        <hoTen>Đặng Thị Yến</hoTen>
+        <gioiTinh>Nữ</gioiTinh>
+        <ngaySinh>1995-03-13T00:00:00+07:00</ngaySinh>
         <noiO>Hà Nội</noiO>
-        <hoKhau>78 Phan Đình Phùng, Ba Đình, Hà Nội</hoKhau>
-        <ngheNghiep>Bác sĩ</ngheNghiep>
-        <tinhTrangHonNhan>Đã kết hôn</tinhTrangHonNhan>
-        <thuNhap>4.2E7</thuNhap>
+        <hoKhau>9 Cầu Giấy, Cầu Giấy, Hà Nội</hoKhau>
+        <ngheNghiep>Giáo viên tiếng Anh</ngheNghiep>
+        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
+        <thuNhap>2.1E7</thuNhap>
     </employee>
     <employee>
         <id>1</id>
@@ -34,37 +56,15 @@
         <thuNhap>3.5E7</thuNhap>
     </employee>
     <employee>
-        <id>2</id>
-        <hoTen>Trần Thị Bắc</hoTen>
-        <gioiTinh>Nữ</gioiTinh>
-        <ngaySinh>1992-09-07T00:00:00+07:00</ngaySinh>
-        <noiO>TP. Hồ Chí Minh</noiO>
-        <hoKhau>102 Lê Lợi, Quận 1, TP. Hồ Chí Minh</hoKhau>
-        <ngheNghiep>Nhân viên kinh doanh</ngheNghiep>
-        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
-        <thuNhap>1.85E7</thuNhap>
-    </employee>
-    <employee>
-        <id>6</id>
-        <hoTen>d</hoTen>
-        <gioiTinh>Nữ</gioiTinh>
-        <ngaySinh>1999-12-12T00:00:00+07:00</ngaySinh>
-        <noiO>a</noiO>
-        <hoKhau>a</hoKhau>
-        <ngheNghiep>a</ngheNghiep>
-        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
-        <thuNhap>12.0</thuNhap>
-    </employee>
-    <employee>
-        <id>5</id>
-        <hoTen>Đặng Thị Yến</hoTen>
-        <gioiTinh>Nữ</gioiTinh>
-        <ngaySinh>1995-03-13T00:00:00+07:00</ngaySinh>
+        <id>3</id>
+        <hoTen>Lê Văn Chiến</hoTen>
+        <gioiTinh>Nam</gioiTinh>
+        <ngaySinh>1978-12-02T00:00:00+07:00</ngaySinh>
         <noiO>Hà Nội</noiO>
-        <hoKhau>9 Cầu Giấy, Cầu Giấy, Hà Nội</hoKhau>
-        <ngheNghiep>Giáo viên tiếng Anh</ngheNghiep>
-        <tinhTrangHonNhan>Độc thân</tinhTrangHonNhan>
-        <thuNhap>2.1E7</thuNhap>
+        <hoKhau>78 Phan Đình Phùng, Ba Đình, Hà Nội</hoKhau>
+        <ngheNghiep>Bác sĩ</ngheNghiep>
+        <tinhTrangHonNhan>Đã kết hôn</tinhTrangHonNhan>
+        <thuNhap>4.2E7</thuNhap>
     </employee>
     <employee>
         <id>7</id>
