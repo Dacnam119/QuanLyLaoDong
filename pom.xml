@@ -12,7 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>nhom12.oop14.quanlylaodong.QuanLyLaoDong</exec.mainClass>
+        <exec.mainClass>nhom12.oop14.App</exec.mainClass> <!-- Chỉnh lại đường dẫn lớp chính -->
     </properties>
 
     <dependencies>
@@ -71,6 +71,44 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}</directory> <!-- Đảm bảo sử dụng thư mục gốc -->
+                                    <includes>
+                                        <include>Data.xml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>your.package.MainClass</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
 
             <!-- Maven Surefire Plugin for running tests -->

@@ -34,7 +34,6 @@ public class NguoiLaoDongController {
         view.addSortNguoiLaoDongTenListener(new SortByNameListener());
         view.addSortNguoiLaoDongThuNhapListener(new SortByIncomeListener());
         view.addListNguoiLaoDongSelectionListener(new NguoiLaoDongTableSelectionListener());
-//        view.searchBtnActionPerformed(new SearchByName());
         view.addSearchNguoiLaoDongListener(new SearchNguoiLaoDongListener());
     }
 
