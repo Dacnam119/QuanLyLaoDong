@@ -13,6 +13,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.imageio.ImageIO;
@@ -375,14 +376,13 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         // TODO add your handling code here:
     }// GEN-LAST:event_gioiTinhBoxActionPerformed
 
-    
+
     private void timKiemFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timKiemFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_timKiemFieldActionPerformed
 
-    
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_searchBtnActionPerformed
-         
+
     }// GEN-LAST:event_searchBtnActionPerformed
 
     private void anhBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_anhBtnActionPerformed
@@ -542,7 +542,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
     public String getThuNhapField() {
         return thuNhapField.getText();
     }
-    
+
     public String getTimKiemFieldText() {
         return timKiemField.getText();  // Assuming timKiemField is your search text field
     }
@@ -556,6 +556,11 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         return sdf.format(date);
     }
 
+    public String decformat (double number){
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        return decimalFormat.format(number);
+    }
+    
     public void showListNguoiLaoDong(List<NguoiLaoDong> list) {
         int size = list.size();
         Object[][] nguoilaodongs = new Object[size][10];
@@ -568,7 +573,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
             nguoilaodongs[i][5] = list.get(i).getHoKhau();
             nguoilaodongs[i][6] = list.get(i).getNgheNghiep();
             nguoilaodongs[i][7] = list.get(i).getTinhTrangHonNhan();
-            nguoilaodongs[i][8] = list.get(i).getThuNhap();
+            nguoilaodongs[i][8] = decformat(list.get(i).getThuNhap());
 
             // Chuyển đổi hình ảnh thành ImageIcon
             if (list.get(i).getHinhAnh() != null) {
@@ -714,28 +719,39 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
         return null;
     }
 
-     public void updateNguoiLaoDongTable(List<NguoiLaoDong> nguoiLaoDongList) {
+    public void updateNguoiLaoDongTable(List<NguoiLaoDong> nguoiLaoDongList) {
         DefaultTableModel model = (DefaultTableModel) nguoiLaoDongTable.getModel();
         model.setRowCount(0);  // Clear existing rows
 
         // Duyệt qua danh sách người lao động và thêm vào bảng
-        for (NguoiLaoDong nguoi : nguoiLaoDongList) {
+        for (NguoiLaoDong nld : nguoiLaoDongList) {
+            ImageIcon imageIcon = null;
+            if (nld.getHinhAnh() != null) {
+                // Nếu hình ảnh không rỗng, chuyển đổi thành ImageIcon
+                imageIcon = new ImageIcon(nld.getHinhAnh());
+            }
+
             model.addRow(new Object[]{
-                nguoi.getId(), // Cột ID
-                nguoi.getHoTen(), // Cột Họ tên
-                nguoi.getGioiTinh(), // Cột Giới tính
-                nguoi.getNgaySinh(), // Cột Ngày sinh
-                nguoi.getNoiO(), // Cột Nơi ở
-                nguoi.getHoKhau(), // Cột Hộ khẩu
-                nguoi.getNgheNghiep(), // Cột Nghề nghiệp
-                nguoi.getTinhTrangHonNhan(), // Cột Tình trạng hôn nhân
-                nguoi.getThuNhap(), // Cột Thu nhập
-                nguoi.getHinhAnh() // Cột Hình ảnh
+                nld.getId(), // Cột ID
+                nld.getHoTen(), // Cột Họ tên
+                nld.getGioiTinh(), // Cột Giới tính
+                formatted(nld.getNgaySinh()), // Cột Ngày sinh
+                nld.getNoiO(), // Cột Nơi ở
+                nld.getHoKhau(), // Cột Hộ khẩu
+                nld.getNgheNghiep(), // Cột Nghề nghiệp
+                nld.getTinhTrangHonNhan(), // Cột Tình trạng hôn nhân
+                decformat(nld.getThuNhap()), // Cột Thu nhập
+                imageIcon // Cột Hình ảnh (ImageIcon)
             });
         }
+
+        // Thiết lập chiều cao hàng cho phù hợp với hình ảnh
+        nguoiLaoDongTable.setRowHeight(80); // Điều chỉnh kích thước theo nhu cầu
+
+        // Đảm bảo áp dụng lại ImageCellRenderer cho cột hình ảnh sau khi cập nhật dữ liệu
+        nguoiLaoDongTable.getColumnModel().getColumn(9).setCellRenderer(new ImageCellRenderer());
     }
 
-    
     private boolean validateFields() {
         return validateNotEmpty(hoTenField, "Tên")
                 && validateNotEmpty(noiOField, "Nơi ở")
@@ -816,7 +832,7 @@ public class NguoiLaoDongView extends javax.swing.JFrame implements ActionListen
     public void addSortNguoiLaoDongTenListener(ActionListener listener) {
         sortNguoiLaoDongTenBtn.addActionListener(listener);
     }
-    
+
     public void addSearchNguoiLaoDongListener(ActionListener listener) {
         searchBtn.addActionListener(listener);  // Assuming 'searchBtn' is your search button
     }
