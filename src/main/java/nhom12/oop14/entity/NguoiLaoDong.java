@@ -1,85 +1,69 @@
 package nhom12.oop14.entity;
 
 import java.awt.Image;
+import java.awt.Image;
 import java.io.Serializable;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "nguoiLaoDong")
-@XmlAccessorType(XmlAccessType.FIELD)
-public class NguoiLaoDong implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+ @XmlRootElement
+ @XmlAccessorType(XmlAccessType.FIELD)
+public class NguoiLaoDong {
+    @XmlElement
+    private int id;
+     public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    @XmlElement
     private String hoTen;
-    private String gioiTinh;
-    private Date ngaySinh;
-    private String noiO;
-    private String hoKhau;
-    private String ngheNghiep;
-    private String tinhTrangHonNhan;
-    private double thuNhap;
-    private Image hinhAnh;
-    private int Id;
-
-    public NguoiLaoDong() {
-    }
-
-    public NguoiLaoDong(String hoTen, String gioiTinh, Date ngaySinh, String noiO, String hoKhau, String ngheNghiep, String tinhTrangHonNhan, double thuNhap, Image hinhAnh, int Id) {
-        this.hoTen = hoTen;
-        this.gioiTinh = gioiTinh;
-        this.ngaySinh = ngaySinh;
-        this.noiO = noiO;
-        this.hoKhau = hoKhau;
-        this.ngheNghiep = ngheNghiep;
-        this.tinhTrangHonNhan = tinhTrangHonNhan;
-        this.thuNhap = thuNhap;
-        this.hinhAnh = hinhAnh;
-        this.Id = Id;
-    }
-
     public String getHoTen() {
         return hoTen;
     }
-
     public void setHoTen(String hoTen) {
         this.hoTen = hoTen;
     }
-
-    public String getGioiTinh() {
+    @XmlElement
+    private String gioiTinh;
+      public String getGioiTinh() {
         return gioiTinh;
     }
-
     public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
-
-    public Date getNgaySinh() {
+    @XmlElement
+    private Date ngaySinh;
+        public Date getNgaySinh() {
         return ngaySinh;
     }
 
     public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
-
-    public String getNoiO() {
+   @XmlElement
+    private String noiO;
+   public String getNoiO() {
         return noiO;
     }
-
     public void setNoiO(String noiO) {
         this.noiO = noiO;
     }
-
+   @XmlElement
+    private String hoKhau;
     public String getHoKhau() {
         return hoKhau;
     }
-
     public void setHoKhau(String hoKhau) {
         this.hoKhau = hoKhau;
     }
-
+   @XmlElement
+    private String ngheNghiep;
     public String getNgheNghiep() {
         return ngheNghiep;
     }
@@ -87,15 +71,18 @@ public class NguoiLaoDong implements Serializable {
     public void setNgheNghiep(String ngheNghiep) {
         this.ngheNghiep = ngheNghiep;
     }
-
-    public String getTinhTrangHonNhan() {
+   @XmlElement
+    private String tinhTrangHonNhan;
+      public String getTinhTrangHonNhan() {
         return tinhTrangHonNhan;
     }
 
     public void setTinhTrangHonNhan(String tinhTrangHonNhan) {
         this.tinhTrangHonNhan = tinhTrangHonNhan;
     }
-
+   @XmlElement
+    private double thuNhap;
+   
     public double getThuNhap() {
         return thuNhap;
     }
@@ -103,12 +90,14 @@ public class NguoiLaoDong implements Serializable {
     public void setThuNhap(double thuNhap) {
         this.thuNhap = thuNhap;
     }
-    
+   @XmlElement
+    private Image hinhAnh;
+   
     public Image getHinhAnh() {
-        return hinhAnh;  // Trả về đối tượng Image
+        return hinhAnh;
     }
-
-    public ImageIcon getIconHinhAnh() {
+    
+    public ImageIcon getAnhIcon() {
         if (hinhAnh != null) {
             return new ImageIcon(hinhAnh);  // Chuyển Image thành ImageIcon
         }
@@ -119,12 +108,11 @@ public class NguoiLaoDong implements Serializable {
         this.hinhAnh = hinhAnh;
     }
 
-    public int getId() {
-        return Id;
-    }
 
-    public void setId(int Id) {
-        this.Id = Id;
-    }
 
+    @Override
+    public String toString() {
+        return "NguoiLaoDong{" + "id=" + id + ", hoTen=" + hoTen + ", gioiTinh=" + gioiTinh + ", ngaySinh=" + ngaySinh + ", noiO=" + noiO + ", hoKhau=" + hoKhau + ", ngheNghiep=" + ngheNghiep + ", tinhTrangHonNhan=" + tinhTrangHonNhan + ", thuNhap=" + thuNhap + ", hinhAnh=" + hinhAnh + '}';
+    }
+    
 }

@@ -2,7 +2,7 @@ package nhom12.oop14.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import nhom12.oop14.dao.UserDAO;
+import nhom12.oop14.DAO.UserDAO;
 import nhom12.oop14.entity.User;
 import nhom12.oop14.view.LoginView;
 import nhom12.oop14.view.NguoiLaoDongView;
@@ -22,7 +22,6 @@ public class LoginController {
         loginView.setVisible(true);
     }
 
-    
     class LoginListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -31,7 +30,7 @@ public class LoginController {
                 // Nếu đăng nhập thành công, mở màn hình quản lý người lao động
                 nguoiLaoDongView = new NguoiLaoDongView();
                 NguoiLaoDongController nguoiLaoDongController = new NguoiLaoDongController(nguoiLaoDongView);
-                 nguoiLaoDongController.showNguoiLaoDongView();
+                nguoiLaoDongController.showNguoiLaoDongView();
 
                 loginView.setVisible(false);
             } else {
@@ -40,6 +39,4 @@ public class LoginController {
             }
         }
     }
-    
-    
 }

@@ -14,16 +14,23 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class ImageCellRenderer extends DefaultTableCellRenderer {
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+   public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        // Kiểm tra xem giá trị có phải là ImageIcon hay không
         if (value instanceof ImageIcon) {
-            setIcon((ImageIcon) value);  // Đảm bảo là ImageIcon
+            ImageIcon originalIcon = (ImageIcon) value;
+            int rowHeight = table.getRowHeight();  // Lấy chiều cao của hàng
+            int colWidth = table.getColumnModel().getColumn(column).getWidth();  // Lấy chiều rộng của cột
+
+            // Tạo hình ảnh thu nhỏ để vừa với ô
+            Image scaledImage = originalIcon.getImage().getScaledInstance(colWidth - 10, rowHeight - 10, Image.SCALE_SMOOTH);
+            setIcon(new ImageIcon(scaledImage));
         } else {
-            setIcon(null);  // Nếu không phải là ImageIcon, không vẽ gì
+            setIcon(null);
         }
-        setHorizontalAlignment(CENTER);  // Căn giữa hình ảnh
-        setVerticalAlignment(CENTER);    // Căn giữa hình ảnh
-        setText("");  // Đảm bảo không có văn bản bên cạnh hình ảnh
+
+        setHorizontalAlignment(CENTER);
+        setVerticalAlignment(CENTER);
+        setText("");  // Xóa bất kỳ văn bản nào trong ô
         return this;
     }
 }

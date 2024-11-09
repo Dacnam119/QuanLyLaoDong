@@ -1,94 +1,93 @@
-package nhom12.oop14.dao;
+package nhom12.oop14.DAO;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import nhom12.oop14.entity.NguoiLaoDong;
 import nhom12.oop14.entity.NguoiLaoDongXML;
 import nhom12.oop14.utils.FileUtils;
 
 public class NguoiLaoDongDAO {
-    private static final String FILE_PATH = "Data.xml"; 
+    private static final String FILE_PATH = "Data.xml"; // Đường dẫn đến file XML
     private List<NguoiLaoDong> danhSach;
 
+    // Khởi tạo danh sách người lao động từ file XML
     public NguoiLaoDongDAO() {
-        this.danhSach = readNguoiLaoDongList();
+        this.danhSach = readNguoiLaoDongList(); // Đọc danh sách từ file XML
         if (danhSach == null) {
-            danhSach = new ArrayList<NguoiLaoDong>();
+            danhSach = new ArrayList<>(); // Nếu không có dữ liệu, khởi tạo danh sách trống
+        } else {
+            System.out.println("Danh sách người lao động từ file XML:");
+            System.out.println(danhSach.size() + " người lao động");
+            for (NguoiLaoDong nld : danhSach) {
+                // System.out.println(nld); // In từng người lao động để kiểm tra
+                System.out.println(nld.toString());
+            }
         }
     }
 
-    private void writeNguoiLaoDongList(List<NguoiLaoDong> nld) {
+    private List<NguoiLaoDong> readNguoiLaoDongList() {
+        System.out.println("0");
+        try {
+            JAXBContext context = JAXBContext.newInstance(NguoiLaoDongXML.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            NguoiLaoDongXML nguoiLaoDongXML = (NguoiLaoDongXML) unmarshaller.unmarshal(new File(FILE_PATH));
+            if (nguoiLaoDongXML != null) {
+                danhSach = nguoiLaoDongXML.getNguoiLaoDong();
+                return danhSach;
+            }
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>(); // Empty list if no data is read
+    }
+
+    // Ghi danh sách người lao động vào file XML
+    private void writeNguoiLaoDongList() throws IOException {
         NguoiLaoDongXML nguoiLaoDongXML = new NguoiLaoDongXML();
-        nguoiLaoDongXML.setNguoiLaoDong(nld);
+        nguoiLaoDongXML.setNguoiLaoDong(danhSach);
         FileUtils.writeXMLtoFile(FILE_PATH, nguoiLaoDongXML);
     }
 
-   
-     // Đọc danh sách người lao động từ file XML
-    
-    private List<NguoiLaoDong> readNguoiLaoDongList() {
-        List<NguoiLaoDong> list = new ArrayList<NguoiLaoDong>();
-        NguoiLaoDongXML nguoiLaoDongXML = (NguoiLaoDongXML) FileUtils.readXMLFile(
-                FILE_PATH, NguoiLaoDongXML.class);
-        if (nguoiLaoDongXML != null) {
-            list = nguoiLaoDongXML.getNguoiLaoDong();
-        }
-        return list;
+    public List<NguoiLaoDong> getDanhSach() {
+        return danhSach;
     }
 
-    
-     // Thêm người lao động vào danh sách và lưu vào file XML
-     
-    public void themNguoiLaoDong(NguoiLaoDong nld) {
-        int id = 1;
-        if (danhSach != null && danhSach.size() > 0) {
-            id = danhSach.size() + 1;
-        }
+    // Thêm người lao động vào danh sách và lưu vào file XML
+    public void themNguoiLaoDong(NguoiLaoDong nld) throws IOException {
+        int id = danhSach.size() + 1;
         nld.setId(id);
         danhSach.add(nld);
-        writeNguoiLaoDongList(danhSach);
+        writeNguoiLaoDongList(); // Ghi lại vào file XML sau khi thêm
     }
-    
 
-  
-     //Cập nhật thông tin người lao động trong danh sách và lưu vào file XML
-    
-    public void capNhatNguoiLaoDong(NguoiLaoDong nld) {
+    // Cập nhật thông tin người lao động
+    public void capNhatNguoiLaoDong(NguoiLaoDong nld) throws IOException {
         for (int i = 0; i < danhSach.size(); i++) {
             if (danhSach.get(i).getId() == nld.getId()) {
                 danhSach.set(i, nld);
-                writeNguoiLaoDongList(danhSach);  // Fixed to pass danhSach
+                writeNguoiLaoDongList(); // Ghi lại vào file XML sau khi cập nhật
                 break;
             }
         }
     }
 
-   
-     // Xóa người lao động khỏi danh sách và lưu lại vào file XML
-    
-    public boolean xoaNguoiLaoDong(NguoiLaoDong nld) {
-        boolean isFound = false;
-        int size = danhSach.size();
-        for (int i = 0; i < size; i++) {
-            if (danhSach.get(i).getId() == nld.getId()) {
-                nld = danhSach.get(i);
-                isFound = true;
-                break;
-            }
+    // Xóa người lao động theo ID và lưu vào file XML nếu có thay đổi
+    public boolean xoaNguoiLaoDong(int id) throws IOException {
+        boolean isRemoved = danhSach.removeIf(nld -> nld.getId() == id);
+        if (isRemoved) {
+            writeNguoiLaoDongList(); // Ghi lại vào file XML sau khi xóa
         }
-        if (isFound) {
-            danhSach.remove(nld);
-            writeNguoiLaoDongList(danhSach);
-            return true;
-        }
-        return false;
+        return isRemoved;
     }
 
-   
-     // Tìm kiếm người lao động theo tên
-    
+    // Tìm kiếm người lao động theo tên
     public List<NguoiLaoDong> timNguoiLaoDongTheoTen(String hoTen) {
         List<NguoiLaoDong> ketQua = new ArrayList<>();
         for (NguoiLaoDong nld : danhSach) {
@@ -99,41 +98,20 @@ public class NguoiLaoDongDAO {
         return ketQua;
     }
 
-    
-     // Sắp xếp người lao động theo tên
-  
-    public void sapXepTheoTen() {
+    // Sắp xếp người lao động theo tên
+    public void sapXepTheoTen() throws IOException {
         Collections.sort(danhSach, Comparator.comparing(NguoiLaoDong::getHoTen));
-        writeNguoiLaoDongList(danhSach);
+        writeNguoiLaoDongList(); // Ghi lại vào file XML sau khi sắp xếp
     }
 
-    
-     // Sắp xếp người lao động theo thu nhập
-     
-    public void sapXepTheoThuNhap() {
+    // Sắp xếp người lao động theo thu nhập
+    public void sapXepTheoThuNhap() throws IOException {
         danhSach.sort(Comparator.comparingDouble(NguoiLaoDong::getThuNhap));
-        writeNguoiLaoDongList(danhSach);
+        writeNguoiLaoDongList(); // Ghi lại vào file XML sau khi sắp xếp
     }
 
-    public List<NguoiLaoDong> searchByName(String name) {
-    List<NguoiLaoDong> result = new ArrayList<>();
-    for (NguoiLaoDong nguoi : danhSach) {
-        if (nguoi.getHoTen().toLowerCase().contains(name.toLowerCase())) {
-            result.add(nguoi);
-        }
-    }
-    return result;
-}
-    
-    public List<NguoiLaoDong> getDanhSach() {
-        return danhSach;
-    }
-
+    // Đặt danh sách người lao động
     public void setDanhSach(List<NguoiLaoDong> danhSach) {
         this.danhSach = danhSach;
-    }
-
-    public List<NguoiLaoDong> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
